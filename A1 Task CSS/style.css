@@ -1,0 +1,152 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    font-family:  'poppins', sans-serif;
+}
+
+main {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 25px;
+    font-family: "Poppins", sans-serif;
+    position: relative;
+}
+
+.child1 {
+    height: 755px;
+    width: 60%;
+    background-color: #fdcc02;
+    border-start-start-radius: 20px;
+    border-end-start-radius: 20px;
+    padding-left: 50px;
+    position: relative;
+}
+
+.child1 .logo {
+    margin-top: 15px;
+    width: 180px;
+}
+
+aside .topic {
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 3px;
+}
+
+aside #heading {
+    font-size: 120px;
+    font-weight: 600;
+    line-height: 1;
+}
+
+aside article {
+    font-size: 20px;
+    font-weight: 300;
+    width: 465px;
+}
+
+aside {
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;    
+}
+
+.center {
+    height: 50%;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+}
+
+#hr {
+    font-weight: 700;
+}
+
+#hr hr{
+    width: 40px;
+    height: 1.5px;
+    border: none;
+    display: inline-block;
+    margin-bottom: 5px;
+    margin-right: 20px;
+    background-color: black;
+    
+}
+
+.hr {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:end;
+    margin: 50px 60px 0px;
+}
+
+.hr hr{
+    width: 50px;
+    background-color: black;
+    height: 5px;
+    border-radius: 5px;
+    margin-bottom: 7px;
+}
+
+.pokeBall {
+    position:absolute;
+    bottom: 0px;
+    width: 350px;
+}
+
+.child2 {
+    height: 755px;
+    width: 568px;
+    background-color:#fae8b5;
+    border-end-end-radius: 20px;
+    border-start-end-radius: 20px;
+}
+
+.child2 img {
+    width: 588px;
+    position: relative;
+    right: 300px;
+}
+
+.circle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: end;
+    gap: 15px;
+    margin: 0px 50px;
+    position:relative;
+    bottom: 370px;
+}
+
+.circle span:nth-child(1) {
+    background-color: black;
+    width: 16px;
+    height: 16px;
+    transform: translateX(3px);
+}
+
+.circle span {
+    text-align: center;
+    width: 12px;
+    height: 12px;
+    background-color: #fdcc02;
+    border-radius: 50%;
+}
+
+@media (max-width: 1450px) {
+    body {
+        min-width: 1450px;
+    }
+}

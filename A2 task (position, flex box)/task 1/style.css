@@ -1,0 +1,148 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap'); */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    font-family:  'poppins', sans-serif;
+}
+
+body {
+    background-color: black;
+    color: white;
+}
+
+header {
+    padding: 0px 100px;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav .left {
+    font-size: 22px;
+}
+
+nav .left img {
+    height: 70px;
+    width: 200px;
+}
+
+nav .center ul{
+    display: flex;
+    gap: 30px;
+    list-style: none;
+}
+
+nav .center ul li a{
+    text-decoration: none;
+    color: white;
+}
+
+nav .right button{
+    padding: 12px 15px;
+    background-color: #191919;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+section .heading {
+    text-align: center;
+    font-size: 130px;
+    line-height: 1.5;
+    word-spacing: 40px;
+}
+
+.product {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+section .filter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+}
+
+.filter .filt-btn {
+    color: white;
+    border: none;
+    font-size: 16px;
+    background-color: #191919;
+    border-radius: 25px;
+    padding: 12px 15px;
+}
+
+.filt-btn:nth-child(1) {
+    padding: 12px 20px;
+}
+
+.filter .filt-btn:focus {
+    background-color: #fc4608;
+}
+
+.carts {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+.cart {
+    background-color: #0e0e0e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 20px;
+    height: 430px;
+    width: 350px;
+}
+
+.cart .img img{
+    border-radius: 20px;
+    object-fit: cover;
+    background-size: cover;
+    background-position: top;
+    height: 250px;
+    width: 350px;
+    
+}
+
+.cart .info {
+    height: 200;
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    
+}
+
+.cart .info button {
+     border: none;
+    border-radius: 25px;
+    padding: 8px 12px;
+    background-color: #571e0a;
+    color: #e68d5a;
+    font-weight: 600;
+}
+
+@media (max-width: 1200px) {
+    body {
+        min-width: 1200px;
+    }
+}
