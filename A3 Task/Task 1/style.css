@@ -1,0 +1,173 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+    font-family: 'poppins', sans-serif;
+}
+
+main {
+    width: 100%;
+    background: linear-gradient(45deg, #08041e, #100a5a, #480532, #310e4a, #370d4d, #0d041b, #06020f);
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 5% 5% 45% 45%;
+    grid-template-areas:
+        "nav nav nav nav"
+        "h1 h1 h1 h1"
+        "cart1 cart2 cart3 cart4"
+        "cart5 cart6 cart7 cart8";
+    gap: 10px;
+
+    padding: 10px 100px;
+
+}
+
+nav {
+    grid-area: nav;
+    display: flex;
+    justify-content: end;
+}
+
+nav span {
+    color: white;
+    align-self: flex-end;
+    cursor: pointer;
+}
+
+nav span:focus {
+    font-size: 15px;
+}
+
+h3 {
+    color: white;
+    justify-self: center;
+    grid-column: 1/2;
+    padding-right: 90px;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.cart1 {
+    grid-area: cart1;
+}
+
+.cart2 {
+    grid-area: cart2;
+}
+
+.cart3 {
+    grid-area: cart3;
+}
+
+.cart4 {
+    grid-area: cart4;
+}
+
+.cart5 {
+    grid-area: cart5;
+}
+
+.cart6 {
+    grid-area: cart6;
+}
+
+.cart7 {
+    grid-area: cart7;
+}
+
+.cart8 {
+    grid-area: cart8;
+}
+
+main .cart {
+    width: 220px;
+    height: 320px;
+    background-color: rgba(203, 197, 197, 0.2);
+    border-radius: 20px;
+    justify-self: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+        padding: 16px;
+
+}
+
+.cart img {
+    height: 180px;
+    width: 190px;
+    border-radius: 10px;
+    border: 1px solid white;
+}
+
+.cart .info {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.info h4 {
+    color: rgb(204, 202, 202);
+}
+
+.like {
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    color: white;
+}
+
+.like span {
+    font-size: 14px;
+}
+
+.like i {
+    font-size: 25px;
+    color: rgb(164, 163, 163);
+}
+
+.like i:focus {
+    border-radius: 100%;
+    width: 22px;
+    height: 20px;
+    background: white;
+
+}
+
+.btn {
+    border: 3px solid #a176cd;
+    padding: 8px 40px;
+    border-radius: 25px;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.btn:focus {
+    font-size: 19px;
+}
+
+
+
+
+
+
+
+
+
+
+
+@media (max-width: 1200px) {
+    body {
+        min-width: 1200px;
+    }
+}
