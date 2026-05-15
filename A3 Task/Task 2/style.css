@@ -534,6 +534,7 @@ main .center {
 
 /* bottom center1  */
 .bottom .flavor {
+    height: 150px;
     display: flex;
     justify-content: center;
     background-color: white;
@@ -543,7 +544,8 @@ main .center {
 }
 
 .flavor img {
-    width: 100px;
+    width: 120px;
+    height: 155px;
 }
 
 .flavor .info {
@@ -595,20 +597,37 @@ main .center {
 }
 
 
-.bottom .center2 {}
+.bottom .center1 img{
+    position: relative;
+    bottom: 16px;
+}
 
-.bottom .right {}
+.bottom .center2 img{
+    position: relative;
+    bottom: 12px;
+    right: 27px;
+}
+
+.bottom .center2 {
+    gap: 0px;
+}
+
+.bottom .right img{
+    position: relative;
+    bottom: 16px;
+}
 
 
-
-
-
-
-
-
+/* media query */
 
 @media (max-width: 1500px) {
     body {
         min-width: 1500px;
+    }
+}
+
+@media (max-height: 1500px) {
+    body {
+        min-height: 780px;
     }
 }
