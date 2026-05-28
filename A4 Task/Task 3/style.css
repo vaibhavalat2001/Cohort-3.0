@@ -18,15 +18,16 @@ body {
 
 main {
     width: 100%;
+    height: 100%;
     display: grid;
-    grid-template-columns: 4% 32% 18% 20% 12%;
+    grid-template-columns: 3% 30% 18% 20% 12%;
     grid-template-rows: 18% 45% 28%;
     grid-template-areas:
         "card1 card2 card3 card3 card3"
         "card1 card2 card4 card4 card5"
         "card1 card2 card6 card7 card7";
     gap: 40px;
-    padding: 50px 25px 20px 0px;
+    padding: 50px 20px 50px 0px;
 }
 
 .card {
