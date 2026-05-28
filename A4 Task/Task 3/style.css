@@ -1,0 +1,429 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+    font-family: 'poppins', sans-serif;
+}
+
+:root {
+    --card2-bg: #8184d2;
+    --border-edge: rgb(100, 100, 100);
+}
+
+main {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 4% 32% 18% 20% 12%;
+    grid-template-rows: 18% 45% 28%;
+    grid-template-areas:
+        "card1 card2 card3 card3 card3"
+        "card1 card2 card4 card4 card5"
+        "card1 card2 card6 card7 card7";
+    gap: 40px;
+    padding: 50px 25px 20px 0px;
+}
+
+.card {
+    border-radius: 25px;
+}
+
+
+/* Main Card1  */
+.card1 {
+    height: 80%;
+    width: 90%;
+    grid-area: card1;
+    display: flex;
+    flex-direction: column;
+    gap: 125px;
+    grid-row: 2/4;
+    margin-left: 20px;
+}
+
+.card1 span {
+    transition: all 0.3s ease;
+    height: 100%;
+    width: 100%;
+    font-weight: 550;
+    transform: rotate(-90deg);
+}
+
+.card1 span:active {
+    transform: scale(1);
+}
+
+
+/* Main Card2  */
+.card2 {
+    grid-area: card2;
+    background-color: var(--card2-bg);
+    padding: 25px;
+}
+
+.card2 .header {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    width: 40%;
+    background-color: white;
+    clip-path: polygon(0 0, 100% 0, 85% 100%, 0 100%);
+    width: 45%;
+    margin: -26px 0 0 -26px;
+    padding: 10px 20px;
+    border-radius: 0 0 100px 0;
+}
+
+.card2  .header:active {
+    transform: scale(0.9);
+}
+
+.card2 .header i {
+    font-size: 25px;
+}
+
+.card2 .header span {
+    font-weight: 550;
+    font-size: 20px;
+}
+
+.card2 .circle {
+    display: flex;
+    justify-content: end;
+}
+
+.card2 .circle .white {
+    border-radius: 50%;
+    border: 8px solid white;
+    position: relative;
+    top: 30px;
+}
+
+.card2 .circle .white .cir {
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    background-color: #efaeffff;
+    border: 12px solid var(--card2-bg);
+}
+
+
+.card2 .circle img {
+    width: 250px;
+    position: relative;
+    bottom: 40px;
+}
+
+.card2 .info {
+    color: white;
+    display: flex;
+    justify-content: space-between;
+}
+
+.card2 .info .name {
+    font-size: 40px;
+}
+
+.card2 .info .name span {
+    font-size: 60px;
+    color: rgb(234, 233, 233);
+}
+
+.card2 .info .name h1 {
+    width: 150px;
+}
+
+.card2 p {
+    gap: 10px;
+    color: rgb(203, 199, 199);
+    text-decoration: underline dashed;
+    text-underline-offset: 10px;
+}
+
+.card2 p:active {
+    transform: scale(0.9);
+}
+
+.card2 p i {
+    font-size: 20px;
+    color: white;
+}
+
+.card2 .my-design {
+    position: relative;
+    width: 160px;
+    height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 150px;
+}
+
+.card2 .my-design .outer-line {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    border: 2px solid rgba(0, 0, 0, 0.4);
+    /* Dark subtle line */
+    border-radius: 50%;
+    /* Clip it so only the top/sides show, mimicking the image */
+    clip-path: inset(0 0 40% 0);
+}
+
+/* The solid black record disc */
+.card2 .my-design .disc {
+    width: 100px;
+    background-color: #000000;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+
+
+/* Main Card3  */
+.card3 {
+    display: flex;
+    grid-area: card3;
+}
+
+.card3 h1 {
+    line-height: 140px;
+    display: inline-block;
+    font-size: 190px;
+}
+
+.card3 hr {
+    height: 40px;
+    width: 40px;
+    border: none;
+    border-top: 15px solid black;
+    border-right: 15px solid black;
+    position: relative;
+    right: 30px;
+}
+
+
+
+/* Main Card4  */
+.card4 {
+    grid-area: card4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.card4 video {
+    width: 84%;
+    border-radius: 25px;
+}
+
+.card4::after {
+    content: "";
+    width: 12px;
+    height: 12px;
+    border-top: 2.5px solid white;
+    border-right: 2.5px solid white;
+    position: absolute;
+    right: 70px;
+    top: 25px;
+}
+
+
+
+/* Main Card5  */
+.card5 {
+    grid-area: card5;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card5 .card5-top {
+    width: 100%;
+    height: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #abd9d7;
+    border-start-start-radius: 25px;
+    border-start-end-radius: 25px;
+    position: relative;
+}
+
+.card5 .card5-top div h1 {
+    font-size: 50px;
+}
+
+.card5 .card5-top div span {
+    font-size: 25px;
+    font-family: monospace;
+}
+
+.card5 .card5-top hr {
+    border: none;
+    border-right: 3px solid var(--border-edge);
+    border-top: 3px solid var(--border-edge);
+    height: 15px;
+    width: 15px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.card5 .card5-btm {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 50%;
+    background-color: #8e6fbe;
+    border-end-start-radius: 25px;
+    border-end-end-radius: 25px;
+    position: relative;
+}
+
+.card5 .card5-btm div h1 {
+    font-size: 50px;
+    color: white;
+}
+
+.card5 .card5-btm div span {
+    font-size: 25px;
+    color: rgb(205, 205, 205);
+    font-family: monospace;
+}
+
+.card5 .card5-btm hr {
+    border: none;
+    border-right: 3px solid var(--border-edge);
+    border-top: 3px solid var(--border-edge);
+    height: 15px;
+    width: 15px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+
+/* Main Card6  */
+.card6 {
+    grid-area: card6;
+    background-color: #585858ff;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.card6 div {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.card6 div i {
+    font-size: 60px;
+    color: white
+}
+
+.card6 div i:active {
+    transform: scale(0.8)
+}
+
+.card6 div span {
+    color: rgb(224, 222, 222);
+    font-size: 35px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.card6 hr {
+    height: 15px;
+    width: 15px;
+    border: none;
+    border-right: 3px solid white;
+    border-top: 3px solid white;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+
+
+/* Main Card7  */
+.card7 {
+    grid-area: card7;
+    background-color: black;
+    display: flex;
+    position: relative;
+}
+
+.card7 .img {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card7 .img img {
+    width: 150px
+}
+
+.card7 .award {
+    width: 50%;
+    background-color: #fec265;
+    display: flex;
+    justify-content: center;
+    border-radius: 25px;
+}
+
+.card7 .award div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+}
+
+.card7 .award div h1 {
+    font-size: 50px;
+    font-weight: 550;
+}
+
+.card7 .award div p {
+    font-size: 20px;
+}
+
+.card7 .award div span {
+    font-size: 22px;
+    font-family: monospace;
+}
+
+.card7 .award hr {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 15px;
+    height: 15px;
+    border: none;
+    border-top: 3px solid var(--border-edge);
+    border-right: 3px solid var(--border-edge);
+}
+
+
+/* Media Query  */
+@media (max-width: 1500px) {
+    body {
+        min-width: 1500px;
+    }
+}
