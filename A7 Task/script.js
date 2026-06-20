@@ -38,16 +38,16 @@ let ui = () => {
         task.setAttribute("data-id", `${index}`);
         task.setAttribute("data-status", `${obj.status}`);  // using setAttribue we can add the attribute. setAttribute give attribute property and value.
         task.setAttribute("data-category", "task");
-        task.className = "task bg-blue-900 w-[220px] h-[200px] rounded-lg px-4 pb-4";
+        task.className = "task bg-[#0096c7] w-[220px] h-[200px] rounded-lg px-4 pb-4";
         
         
 // Task 3: DOM Manipulation  ==>
         task.innerHTML += `<div class="status flex justify-end font-bold text-orange-300 -mr-2"><h2>${obj.status}</h2></div>
         <h1 class="font-bold md:text-3xl h-3/4 text-xl text-white">${obj.title}</h1>
         <div class="btn font-bold w-full flex gap-2 justify-between">
-        <button class="bg-yellow-300 rounded-lg px-1 cursor-pointer" onclick="editTask('${obj.title}')">Edit</button>
-        <button class="bg-green-300 rounded-lg px-1 cursor-pointer" onclick="completeTask('${obj.status}', ${index})">Complete</button>
-        <button class="bg-red-700 rounded-lg px-1 cursor-pointer" onclick="deleteTask(${index})">Delete</button>
+        <button class="bg-[#e76f51] rounded-lg px-1 cursor-pointer" onclick="editTask('${obj.title}')">Edit</button>
+        <button class="bg-[#a7c957] rounded-lg px-1 cursor-pointer" onclick="completeTask('${obj.status}', ${index})">Complete</button>
+        <button class="bg-[#e63946] rounded-lg px-1 cursor-pointer" onclick="deleteTask(${index})">Delete</button>
         </div>`;
         tasks.append(task);
         
@@ -70,15 +70,27 @@ let night = document.querySelector(".night");
 let body = document.body;
 
 theme.addEventListener("click", (e) => {
+    localStorage.setItem("them", "bg-black");
+    // let obj = {
+    //     day: `day.classList.toggle("hidden")`,
+    //     night: `night.classList.toggle("hidden")`   // use classlist for add, remove and toggle class in the element
+    // }
+
+    // localStorage.setItem("them", JSON.stringify(obj));
+     
     day.classList.toggle("hidden");
-    night.classList.toggle("hidden");   // use classlist for add, remove and toggle class in the element
+    night.classList.toggle("hidden", localStorage.getItem("theme"));
+
+
     if (night.dataset.theme === "dark") {
         night.removeAttribute("data-theme");
+        
     } else {
         night.setAttribute("data-theme", "dark");   // fot set attribute
     }
+    
+    body.classList.add(localStorage.getItem("theme"));
     let dark = night.dataset.theme;     // get for custom attribute value.
-    body.classList.toggle("bg-black");
 });
 
 
