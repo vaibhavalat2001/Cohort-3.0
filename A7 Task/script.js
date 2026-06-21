@@ -70,28 +70,43 @@ let night = document.querySelector(".night");
 let body = document.body;
 
 theme.addEventListener("click", (e) => {
-    localStorage.setItem("them", "bg-black");
-    // let obj = {
-    //     day: `day.classList.toggle("hidden")`,
-    //     night: `night.classList.toggle("hidden")`   // use classlist for add, remove and toggle class in the element
-    // }
-
-    // localStorage.setItem("them", JSON.stringify(obj));
-     
     day.classList.toggle("hidden");
-    night.classList.toggle("hidden", localStorage.getItem("theme"));
+    night.classList.toggle("hidden");
+    let theme = localStorage.getItem("theme");
+    if (theme === "bg-white") {
+        night.setAttribute("data-theme", "dark");
+        localStorage.setItem("theme", "bg-black");
+        body.classList.add("bg-black");
+        body.classList.remove("bg-white");
+    } else if (theme === "bg-black") {
+        night.removeAttribute("data-theme", "dark");
+        localStorage.setItem("theme", "bg-white");
+        body.classList.add("bg-white");
+        body.classList.remove("bg-black");
 
-
-    if (night.dataset.theme === "dark") {
-        night.removeAttribute("data-theme");
-        
     } else {
-        night.setAttribute("data-theme", "dark");   // fot set attribute
+        localStorage.setItem("theme", "bg-black");
+        body.classList.toggle("bg-black"); 
     }
     
-    body.classList.add(localStorage.getItem("theme"));
-    let dark = night.dataset.theme;     // get for custom attribute value.
+    // let dark = night.dataset.theme;     // get for custom attribute value.
 });
+
+let dark = () => {
+    let theme = localStorage.getItem("theme");
+    if (theme === "bg-white") {
+        day.classList.add("hidden");
+        body.classList.add("bg-white");
+        body.classList.remove("bg-black");
+    } else if (theme === "bg-black") {
+        body.classList.add("bg-black");
+        body.classList.remove("bg-white");
+        day.classList.remove("hidden");
+        night.classList.add("hidden");
+    }
+}
+dark();
+
 
 
 // Task 5: Event Handling:  ==>
