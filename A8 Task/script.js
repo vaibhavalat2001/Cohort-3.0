@@ -154,12 +154,12 @@ transForm.addEventListener("submit", (e) => {
 
 
 // Cash Chart
-let exin = transactions[0].type;
-if (exin === "income") {
-  let inAmount = transactions[0].amt;
-} else {
-  let exAmount
-}
+// let exin = transactions[0].type;
+// if (exin === "income") {
+//   let inAmount = transactions[0].amt;
+// } else {
+//   let exAmount
+// }
 
 
 
