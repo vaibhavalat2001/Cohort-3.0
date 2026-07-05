@@ -17,6 +17,14 @@ const dashboard = document.querySelector(".dashboard");
 const cashChart = document.querySelector("#cashChart");
 const transForm = document.querySelector(".transForm");
 const currentDate = document.querySelector("#currentDate");
+const currentBal = document.querySelector(".currentBal");
+const totalInc = document.querySelector(".totalInc");
+const totalExp = document.querySelector(".totalExp");
+const totalTrans = document.querySelector(".totalTrans");
+const toggle = document.querySelector(".toggle");
+const proDetails = document.querySelector(".proDetails");
+const proName = document.querySelector("#proName");
+const currency = document.querySelector("#currency");
 
 // Register
 regLink.addEventListener("click", () => {
@@ -35,11 +43,13 @@ userLogin.addEventListener("click", () => {
 })
 
 logOut.addEventListener("click", () => {
-  userPro[0] = "User Login";
-    localStorage.setItem("user", JSON.stringify(userPro));
+  localStorage.removeItem("user");
+  userLogin.textContent = "User login";
+  
 })
 
-let regUser = JSON.parse(localStorage.getItem("registeredUser")) || [];  
+
+let regUser = JSON.parse(localStorage.getItem("registeredUser")) || [];
 let userPro = JSON.parse(localStorage.getItem("user")) || [];
 
 loginForm.addEventListener("submit", (e) => {
@@ -60,7 +70,7 @@ loginForm.addEventListener("submit", (e) => {
   } else {
     alert("Invalid user or password");
   }
-  
+
   loginForm.reset();
 });
 
@@ -90,9 +100,9 @@ registerForm.addEventListener("submit", (e) => {
 
 // registeredUsers
 let logged = () => {
-    login.classList.add("hidden");
-    mainPage.classList.remove("hidden");
-    userLogin.innerHTML = userPro[0];
+  login.classList.add("hidden");
+  mainPage.classList.remove("hidden");
+  userLogin.textContent = userPro[0] || "User login";
 }
 logged();
 
@@ -104,7 +114,6 @@ settingBtn.addEventListener("click", () => {
   dashboardBtn.classList.remove("bg-blue-100", "text-blue-800", "font-semibold");
   setting.classList.remove("hidden");
   settingBtn.classList.add("bg-blue-100", "text-blue-800", "font-semibold");
-
 })
 
 dashboardBtn.addEventListener("click", () => {
@@ -117,11 +126,7 @@ dashboardBtn.addEventListener("click", () => {
 
 // Add new Transaction
 newTransBtn.addEventListener("click", () => {
-    addTrans.classList.toggle("hidden");
-})
-
-addTrans.addEventListener("click", (e) => {
-
+  addTrans.classList.toggle("hidden");
 })
 
 close.addEventListener("click", () => {
@@ -130,8 +135,13 @@ close.addEventListener("click", () => {
 
 
 // Adding Transaction
-currentDate.value = new Date().toISOString().split("T")[0];
+let today = () => {
+  currentDate.value = new Date().toISOString().split("T")[0];
+}
+today();
 
+
+// Adding Transactions in the form
 let transactions = JSON.parse(localStorage.getItem(`transactions_${userPro[0]}`)) || [];
 transForm.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -142,62 +152,114 @@ transForm.addEventListener("submit", (e) => {
   let cat = e.target[4].value;
 
   transactions.push({
-    type, 
+    type,
     dec,
-    amt, 
+    amt,
     date,
     cat
   });
-
   localStorage.setItem(`transactions_${userPro[0]}`, JSON.stringify(transactions));
+
+  calTrans();
+  today();
+  transForm.reset();
+  addTrans.classList.add("hidden");
 })
+
+
+let chart;
+// Calculation income and expenses
+let calTrans = () => {
+  let income = 0;
+  let expenses = 0;
+  
+  transactions.forEach(tran => {
+    if (tran.type === "income") {
+      income += Number(tran.amt);
+    } else {
+      expenses += Number(tran.amt);
+    }
+  });
+
+  transData(income, expenses);
+  renderChart(income, expenses);
+}
+calTrans();
+
+
+// represent transition on UI
+function transData(inc = 0, exp = 0) {
+  let exists = transactions.some((data) => data !== "");
+  if (exists) {
+    currentBal.textContent = inc - exp;
+    totalInc.textContent = inc;
+    totalExp.textContent = exp;
+    totalTrans.textContent = transactions.length;
+  }
+}
 
 
 // Cash Chart
-// let exin = transactions[0].type;
-// if (exin === "income") {
-//   let inAmount = transactions[0].amt;
-// } else {
-//   let exAmount
-// }
+function renderChart(inc = 0, exp = 0) {
 
+  if (chart) {
+    chart.destroy();
+  }
 
-
-new Chart(cashChart, {
-  type: "bar",
-  data: {
-    labels: ["Income vs Expenses"],
-    datasets: [
-      {
-        label: "Income",
-        data: [1000],
-        backgroundColor: "#166534",
-        borderRadius: 5
-      },
-      {
-        label: "Expenses",
-        data: [2000],
-        backgroundColor: "#991B1B",
-        borderRadius: 5
-      }
-    ]
-  },
-  options: {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-      legend: {
-        position: "top"
-      }
+  chart = new Chart(cashChart, {
+    type: "bar",
+    data: {
+      labels: ["Income vs Expenses"],
+      datasets: [
+        {
+          label: "Income",
+          data: [inc],
+          backgroundColor: "#166534",
+          borderRadius: 5
+        },
+        {
+          label: "Expenses",
+          data: [exp],
+          backgroundColor: "#991B1B",
+          borderRadius: 5
+        }
+      ]
     },
-    scales: {
-      y: {
-        beginAtZero: true
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          position: "top"
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: true
+        }
       }
     }
-  }
+  })
+};
+
+
+// Dark and Light mode
+// toggle.addEventListener("click", () => {
+//   toggle.toggle
+// })
+
+
+// Profile Setting
+let proSetting = () => {
+  proName.value = userPro[0];
+  currency.value = userPro[1];
+}
+proSetting();
+
+proDetails.addEventListener("submit", (e) => {
+  e.preventDefault();
+  let name = e.target[0].value;
+  let currency = e.target[1].value;
+  localStorage.setItem("user", JSON.stringify([name, currency]));
+  proSetting();
 })
-
-
-// transactions.map((trans) => console.log(trans.type))
-// console.log(transactions)
