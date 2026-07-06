@@ -12,7 +12,7 @@ const newTransBtn = document.querySelector(".newTransBtn");
 const close = document.querySelector(".close");
 const settingBtn = document.querySelector(".settingBtn");
 const setting = document.querySelector(".setting");
-const dashboardBtn = document.querySelector(".dashboardBtn")
+const dashboardBtn = document.querySelector(".dashboardBtn");
 const dashboard = document.querySelector(".dashboard");
 const cashChart = document.querySelector("#cashChart");
 const transForm = document.querySelector(".transForm");
@@ -25,14 +25,14 @@ const toggle = document.querySelector(".toggle");
 const proDetails = document.querySelector(".proDetails");
 const proName = document.querySelector("#proName");
 const currency = document.querySelector("#currency");
-
+const allTrans = document.querySelector(".allTrans");
 // Register
 regLink.addEventListener("click", () => {
   login.classList.add("hidden");
   register.classList.remove("hidden");
 });
 
-// Login 
+// Login
 loginLink.addEventListener("click", () => {
   login.classList.remove("hidden");
   register.classList.add("hidden");
@@ -40,14 +40,12 @@ loginLink.addEventListener("click", () => {
 
 userLogin.addEventListener("click", () => {
   login.classList.remove("hidden");
-})
+});
 
 logOut.addEventListener("click", () => {
   localStorage.removeItem("user");
   userLogin.textContent = "User login";
-  
-})
-
+});
 
 let regUser = JSON.parse(localStorage.getItem("registeredUser")) || [];
 let userPro = JSON.parse(localStorage.getItem("user")) || [];
@@ -57,7 +55,9 @@ loginForm.addEventListener("submit", (e) => {
   let loginName = e.target.name.value.trim().toLowerCase();
   let loginPass = e.target.pass.value.trim().toLowerCase();
 
-  let exists = regUser.some((u) => u.name === loginName && u.pass === loginPass);
+  let exists = regUser.some(
+    (u) => u.name === loginName && u.pass === loginPass,
+  );
   if (exists) {
     login.classList.add("hidden");
     mainPage.classList.remove("hidden");
@@ -66,14 +66,16 @@ loginForm.addEventListener("submit", (e) => {
       if (u.name === loginName) return u.currency;
     });
 
-    localStorage.setItem("user", JSON.stringify([loginName, currency.toString()]));
+    localStorage.setItem(
+      "user",
+      JSON.stringify([loginName, currency.toString()]),
+    );
   } else {
     alert("Invalid user or password");
   }
 
   loginForm.reset();
 });
-
 
 registerForm.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -103,46 +105,48 @@ let logged = () => {
   login.classList.add("hidden");
   mainPage.classList.remove("hidden");
   userLogin.textContent = userPro[0] || "User login";
-}
+};
 logged();
 
-
 // *** left side functionality:
-// dashboard & setting 
+// dashboard & setting
 settingBtn.addEventListener("click", () => {
   dashboard.classList.add("hidden");
-  dashboardBtn.classList.remove("bg-blue-100", "text-blue-800", "font-semibold");
+  dashboardBtn.classList.remove(
+    "bg-blue-100",
+    "text-blue-800",
+    "font-semibold",
+  );
   setting.classList.remove("hidden");
   settingBtn.classList.add("bg-blue-100", "text-blue-800", "font-semibold");
-})
+});
 
 dashboardBtn.addEventListener("click", () => {
   dashboard.classList.remove("hidden");
   dashboardBtn.classList.add("bg-blue-100", "text-blue-800", "font-semibold");
   setting.classList.add("hidden");
   settingBtn.classList.remove("bg-blue-100", "text-blue-800", "font-semibold");
-})
-
+});
 
 // Add new Transaction
 newTransBtn.addEventListener("click", () => {
   addTrans.classList.toggle("hidden");
-})
+});
 
 close.addEventListener("click", () => {
   addTrans.classList.add("hidden");
-})
-
+});
 
 // Adding Transaction
 let today = () => {
   currentDate.value = new Date().toISOString().split("T")[0];
-}
+};
 today();
 
 
 // Adding Transactions in the form
-let transactions = JSON.parse(localStorage.getItem(`transactions_${userPro[0]}`)) || [];
+let transactions =
+  JSON.parse(localStorage.getItem(`transactions_${userPro[0]}`)) || [];
 transForm.addEventListener("submit", (e) => {
   e.preventDefault();
   let type = e.target[0].value;
@@ -156,24 +160,27 @@ transForm.addEventListener("submit", (e) => {
     dec,
     amt,
     date,
-    cat
+    cat,
   });
-  localStorage.setItem(`transactions_${userPro[0]}`, JSON.stringify(transactions));
+  localStorage.setItem(
+    `transactions_${userPro[0]}`,
+    JSON.stringify(transactions),
+  );
 
   calTrans();
+  newTrans()
   today();
   transForm.reset();
   addTrans.classList.add("hidden");
-})
-
+});
 
 let chart;
 // Calculation income and expenses
 let calTrans = () => {
   let income = 0;
   let expenses = 0;
-  
-  transactions.forEach(tran => {
+
+  transactions.forEach((tran) => {
     if (tran.type === "income") {
       income += Number(tran.amt);
     } else {
@@ -183,9 +190,8 @@ let calTrans = () => {
 
   transData(income, expenses);
   renderChart(income, expenses);
-}
+};
 calTrans();
-
 
 // represent transition on UI
 function transData(inc = 0, exp = 0) {
@@ -198,10 +204,8 @@ function transData(inc = 0, exp = 0) {
   }
 }
 
-
 // Cash Chart
 function renderChart(inc = 0, exp = 0) {
-
   if (chart) {
     chart.destroy();
   }
@@ -215,45 +219,73 @@ function renderChart(inc = 0, exp = 0) {
           label: "Income",
           data: [inc],
           backgroundColor: "#166534",
-          borderRadius: 5
+          borderRadius: 5,
         },
         {
           label: "Expenses",
           data: [exp],
           backgroundColor: "#991B1B",
-          borderRadius: 5
-        }
-      ]
+          borderRadius: 5,
+        },
+      ],
     },
     options: {
       responsive: true,
       maintainAspectRatio: false,
       plugins: {
         legend: {
-          position: "top"
-        }
+          position: "top",
+        },
       },
       scales: {
         y: {
-          beginAtZero: true
-        }
-      }
-    }
-  })
-};
-
+          beginAtZero: true,
+        },
+      },
+    },
+  });
+}
 
 // Dark and Light mode
 // toggle.addEventListener("click", () => {
 //   toggle.toggle
 // })
 
+// All Transactions
+function newTrans() {
+  allTrans.innerHTML = "";
+  let div = document.createElement("div");
+  let sign = "";
+  let signClass = "";
+  transactions.forEach((data) => {
+    if (data.type === "income") {
+      sign = "+$";
+      signClass = "text-green-600";
+    } else {
+      sign = "-$";
+      signClass = "text-red-600";
+    }
+    div.innerHTML += `<div class="h-15 grid items-center grid-cols-[1fr_1fr_1fr_1fr_1fr]">
+                        <span>${data.date}</span>
+                        <span class="font-bold">${data.dec}</span>
+                        <span class="pl-3 w-30 rounded bg-gray-100">${data.cat}</span>
+                        <span class="${signClass} font-semibold">${sign}${data.amt}</span>                
+                        <div>
+                          <i class="cursor-pointer active:scale-90 text-xl text-blue-700 mr-5 ri-pencil-ai-fill"></i>
+                          <i class="cursor-pointer active:scale-90 text-xl text-red-700 ri-delete-bin-2-fill"></i>
+                        </div>
+                      </div>
+                      <hr class="w-full border border-gray-300">`
+  });
+  allTrans.append(div);
+}
+newTrans();
 
 // Profile Setting
 let proSetting = () => {
   proName.value = userPro[0];
   currency.value = userPro[1];
-}
+};
 proSetting();
 
 proDetails.addEventListener("submit", (e) => {
@@ -262,4 +294,4 @@ proDetails.addEventListener("submit", (e) => {
   let currency = e.target[1].value;
   localStorage.setItem("user", JSON.stringify([name, currency]));
   proSetting();
-})
+});
