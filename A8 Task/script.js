@@ -137,6 +137,7 @@ newTransBtn.addEventListener("click", () => {
 
 close.addEventListener("click", () => {
   addTrans.classList.add("hidden");
+  transForm.reset();
 });
 
 // Current Date
@@ -146,8 +147,10 @@ let today = () => {
 
 // Adding Transactions in the form
 let transactions =
-  JSON.parse(localStorage.getItem(`transactions_${userPro[0]}`)) || [];
+JSON.parse(localStorage.getItem(`transactions_${userPro[0]}`)) || [];
 
+let index = null;
+console.log(index)
 transForm.addEventListener("submit", (e) => {
   e.preventDefault();
   let type = e.target[0].value;
@@ -156,13 +159,26 @@ transForm.addEventListener("submit", (e) => {
   let date = e.target[3].value;
   let cat = e.target[4].value;
 
-  transactions.push({
-    type,
-    dec,
-    amt,
-    date,
-    cat,
-  });
+
+  if (index === null) {
+    transactions.push({
+      type,
+      dec,
+      amt,
+      date,
+      cat,
+    });
+  } else {
+    transactions[index] = {
+      type,
+      dec,
+      amt,
+      date,
+      cat
+    }
+    index = null;
+  }
+
   localStorage.setItem(
     `transactions_${userPro[0]}`,
     JSON.stringify(transactions),
@@ -173,6 +189,7 @@ transForm.addEventListener("submit", (e) => {
   transForm.reset();
   addTrans.classList.add("hidden");
 });
+
 
 let chart;
 // Calculation income and expenses
@@ -288,9 +305,10 @@ newTrans();
 
 // Edit Transaction
 function edit(ind) {
+  index = ind;
   newTransBtn.click();
   let data = transactions[ind];
- 
+
   transForm[0].value = data.type;
   transForm[1].value = data.dec;
   transForm[2].value = data.amt;
