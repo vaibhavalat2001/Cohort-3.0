@@ -26,6 +26,7 @@ const proDetails = document.querySelector(".proDetails");
 const proName = document.querySelector("#proName");
 const currency = document.querySelector("#currency");
 const allTrans = document.querySelector(".allTrans");
+const resetBtn = document.querySelector(".resetBtn");
 
 // Register
 regLink.addEventListener("click", () => {
@@ -146,11 +147,15 @@ let today = () => {
 };
 
 // Adding Transactions in the form
-let transactions =
-JSON.parse(localStorage.getItem(`transactions_${userPro[0]}`)) || [];
+
+let transactions;
+let transactionsData = () => {
+  transactions = JSON.parse(localStorage.getItem(`transactions_${userPro[0]}`)) || [];
+}
+transactionsData();
 
 let index = null;
-console.log(index)
+
 transForm.addEventListener("submit", (e) => {
   e.preventDefault();
   let type = e.target[0].value;
@@ -326,6 +331,16 @@ function del(ind) {
   newTrans();
   calTrans();
 }
+
+// Reset All Transactions
+resetBtn.addEventListener("click", () => {
+  localStorage.removeItem(`transactions_${userPro[0]}`);
+  transactionsData();
+  calTrans();
+  newTrans();
+})
+
+
 
 // Profile Setting
 let proSetting = () => {
