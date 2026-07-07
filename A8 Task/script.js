@@ -22,11 +22,14 @@ const totalInc = document.querySelector(".totalInc");
 const totalExp = document.querySelector(".totalExp");
 const totalTrans = document.querySelector(".totalTrans");
 const toggle = document.querySelector(".toggle");
+const circle = document.querySelector(".circle");
 const proDetails = document.querySelector(".proDetails");
 const proName = document.querySelector("#proName");
 const currency = document.querySelector("#currency");
 const allTrans = document.querySelector(".allTrans");
 const resetBtn = document.querySelector(".resetBtn");
+const body = document.body;
+
 
 // Register
 regLink.addEventListener("click", () => {
@@ -47,10 +50,18 @@ userLogin.addEventListener("click", () => {
 logOut.addEventListener("click", () => {
   localStorage.removeItem("user");
   userLogin.textContent = "User login";
+  userProfile();
+  proSetting();
+
 });
 
 let regUser = JSON.parse(localStorage.getItem("registeredUser")) || [];
-let userPro = JSON.parse(localStorage.getItem("user")) || [];
+
+let userPro; 
+function userProfile(){
+  userPro = JSON.parse(localStorage.getItem("user")) || [];
+}
+userProfile();
 
 loginForm.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -76,6 +87,8 @@ loginForm.addEventListener("submit", (e) => {
     alert("Invalid user or password");
   }
 
+  
+  proSetting();
   loginForm.reset();
 });
 
@@ -274,9 +287,26 @@ function renderChart(inc = 0, exp = 0) {
 }
 
 // Dark and Light mode
-// toggle.addEventListener("click", () => {
-//   toggle.toggle
-// })
+let saveTheme = localStorage.getItem("theme");
+if (saveTheme === "dark") {
+  document.documentElement.classList.add("dark");
+  circle.classList.add("translate");
+  toggle.classList.toggle("bg-gray-300");
+  toggle.classList.toggle("bg-blue-500");
+
+}
+
+
+toggle.addEventListener("click", () => {
+  circle.classList.toggle("translate");
+  toggle.classList.toggle("bg-gray-300");
+  toggle.classList.toggle("bg-blue-500");
+  document.documentElement.classList.toggle("dark");
+  body.classList.toggle("bg-gray-100");
+  // body.classList.toggle("")
+  localStorage.setItem("theme", document.documentElement.classList.contains("dark")? "dark" : "light");
+})
+
 
 // All Transactions
 function newTrans() {
@@ -295,7 +325,7 @@ function newTrans() {
     div.innerHTML += `<div class="h-15 grid items-center grid-cols-[1fr_1fr_1fr_1fr_1fr]">
                         <span>${data.date}</span>
                         <span class="font-bold">${data.dec}</span>
-                        <span class="pl-3 w-30 rounded bg-gray-100">${data.cat}</span>
+                        <span class="pl-3 w-30 rounded capitalize text-black bg-gray-100">${data.cat}</span>
                         <span class="${signClass} font-semibold">${sign}${data.amt}</span>                
                         <div>
                           <i onclick="edit(${ind})" class="cursor-pointer active:scale-90 text-xl text-blue-700 mr-5 ri-pencil-ai-fill"></i>
@@ -334,18 +364,28 @@ function del(ind) {
 
 // Reset All Transactions
 resetBtn.addEventListener("click", () => {
-  localStorage.removeItem(`transactions_${userPro[0]}`);
-  transactionsData();
-  calTrans();
-  newTrans();
+  let yes = confirm("Are you want to delete all transaction data?");
+  if (yes) {
+    localStorage.removeItem(`transactions_${userPro[0]}`);
+    transactionsData();
+    calTrans();
+    newTrans();
+  }
 })
 
 
 
 // Profile Setting
 let proSetting = () => {
-  proName.value = userPro[0];
-  currency.value = userPro[1];
+  userProfile();
+  let proData = userPro.some((data) => data !== []);
+  if (proData) {
+    proName.value = userPro[0];
+    currency.value = userPro[1] || "hello";
+  } else {
+    proName.value = "User login";
+    currency.value = "INR(₹)";
+  }
 };
 proSetting();
 
