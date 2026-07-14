@@ -102,7 +102,7 @@
     <section
         class="mainPage w-full overflow-hidden h-full lg:grid lg:grid-cols-[250px_1fr] max-lg:grid max-lg:grid-cols-[1fr]">
         <aside
-            class="lg:w-[250px] max-lg:hidden lg:grid-col-span-1 pb-6 px-8 border-r-1 border-gray-300 flex flex-col gap-8 white ">
+            class="lg:w-[250px] max-lg:hidden lg:grid-col-span-1 pb-1 px-8 border-r-1 border-gray-300 flex flex-col gap-8 white ">
             <div class="flex justify-between items-center pt-2">
                 <div class="brand flex px-2 items-center gap-3">
                     <i class="text-3xl ri-stack-fill"></i>
@@ -125,10 +125,13 @@
                         <i class="ri-settings-3-fill"></i><span class="ml-4">Settings</span>
                     </button>
                 </div>
-                <button class="newTransBtn bg-black text-white rounded-lg py-2 cursor-pointer active:scale-95">
-                    <i class="ri-add-fill mr-1"></i>
-                    <span>Add Transaction</span>
-                </button>
+                <div class="flex flex-col justify-between">
+                    <button class="newTransBtn bg-black mb-2 text-white rounded-lg py-2 cursor-pointer active:scale-95">
+                        <i class="ri-add-fill mr-1"></i>
+                        <span>Add Transaction</span>
+                    </button>
+                    <div class="text-center text-sm text-orange-800">By, Vaibhav Gajanan Alat</div>
+                </div>
             </div>
         </aside>
         <main class="lg:w-[100%-250px] max-w-full overflow-x-hidden overflow-y-scroll h-full lg:grid-col-span-1">
