@@ -14,13 +14,13 @@
             background-color: white;
         }
 
-        .dark .white{
+        .dark .white {
             background-color: #1f2937;
             color: white;
         }
 
         .bodyCol {
-            background-color:rgb(243, 244, 246);
+            background-color: rgb(243, 244, 246);
             color: black;
         }
 
@@ -32,39 +32,41 @@
         .border {
             border: 1px solid #E5E7EB;
         }
-        
+
         .dark .border {
             border: 1px solid #374151;
         }
-     
+
 
         .translate {
             transform: translateX(20px);
         }
-
-
     </style>
 </head>
 
 <body class="relative w-full h-full box-border bodyCol flex flex-col justify-center items-center">
     <section class="login w-full h-full absolute hidden flex justify-center items-center  bg-gray-500/50 ">
-        <form action="" class="loginForm white w-[410px] h-100 shadow-lg shadow-gray-900/50 py-10 px-8 flex flex-col rounded-xl gap-3 items-center">
+        <form action=""
+            class="loginForm white w-[410px] h-100 shadow-lg shadow-gray-900/50 pb-10 px-8 flex flex-col rounded-xl gap-3">
+            <div class="closeLog flex justify-end"><i class="font-bold pt-2 -mr-3 ri-close-large-fill"></i></div>
             <div class="w-full flex flex-col items-center gap-3">
                 <h1 class="font-bold text-2xl [word-spacing:8px]">Welcome Back</h1>
                 <h3>Login to FinTrack Pro</h3>
             </div>
             <div class="">
                 <label for="name">Username</label>
-                <input class="outline-black mb-3 border-2 px-4 py-1 text-xl border-gray-200 rounded-sm w-full" type="text" id="name"
-                    required />
+                <input class="outline-black mb-3 border-2 px-4 py-1 text-xl border-gray-200 rounded-sm w-full"
+                    type="text" id="name" required />
                 <label for="pass">Password</label>
-                <input type="password" id="pass" class="px-4 py-1 text-xl outline-black border-2  border-gray-200 rounded-sm w-full" required />
+                <input type="password" id="pass"
+                    class="px-4 py-1 text-xl outline-black border-2  border-gray-200 rounded-sm w-full" required />
             </div>
-            <button class="cursor-pointer active:scale-90 w-full py-2 text-sm rounded-lg bg-blue-900 text-white font-bold"
+            <button
+                class="cursor-pointer active:scale-90 w-full py-2 text-sm rounded-lg bg-blue-900 text-white font-bold"
                 type="submit">
                 Login
             </button>
-            <p>
+            <p class="text-center">
                 Don't have an accout?
                 <a class="regLink active:scale-95 text-blue-700 cursor-pointer">Register here</a>
             </p>
@@ -72,39 +74,48 @@
     </section>
 
     <section class="register absolute hidden w-full h-full bg-gray-500/50  flex justify-center items-center">
-        <form action="" class="registerForm white px-8 py-10 w-[410px] h-100 rounded-xl shadow-lg shadow-gray-900/50 flex flex-col gap-3 items-center">
+        <form action=""
+            class="registerForm white px-8 pb-10 w-[410px] h-100 rounded-xl shadow-lg shadow-gray-900/50 flex flex-col gap-3">
+            <div class="closeReg flex justify-end"><i class="font-bold pt-2 -mr-3 ri-close-large-fill"></i></div>
             <div class="flex flex-col items-center gap-3">
                 <h1 class="font-bold text-2xl">Create Account</h1>
                 <h3>Join FinTrack Pro</h3>
             </div>
             <div class="form">
                 <label for="name">Choose a Username</label>
-                <input type="text" id="name" class="mb-3 w-full outline-black px-4 py-1 text-xl border-2 rounded-sm border-gray-200"
-                    required />
+                <input type="text" id="name"
+                    class="mb-3 w-full outline-black px-4 py-1 text-xl border-2 rounded-sm border-gray-200" required />
                 <label for="pass">Password</label>
-                <input type="password" id="pass" class="w-full outline-black px-4 py-1 text-xl border-2 rounded-sm border-gray-200" required />
+                <input type="password" id="pass"
+                    class="w-full outline-black px-4 py-1 text-xl border-2 rounded-sm border-gray-200" required />
             </div>
             <button class="bg-green-900 text-white rounded-lg text-sm font-bold py-2 w-full cursor-pointer">
                 Register
             </button>
-            <p>
+            <p class="text-center">
                 Already have an account?
                 <a class="loginLink text-blue-700 cursor-pointer">Login here</a>
             </p>
         </form>
     </section>
 
-    <section class="mainPage h-full w-full grid grid-cols-[250px_1fr]">
-        <aside class="h-full w-[250px] py-6 px-6 border-r-1 border-gray-300 flex flex-col gap-8 white">
-            <div class="brand flex items-center gap-3">
-                <i class="text-3xl ri-stack-fill"></i>
-                <div class="leading-none">
-                    <h2 class="text-lg inline font-bold">FinTrack Pro</h2>
-                    <span class="text-gray-500 text-xs">Enterprise Finance</span>
+    <section
+        class="mainPage w-full overflow-hidden h-full lg:grid lg:grid-cols-[250px_1fr] max-lg:grid max-lg:grid-cols-[1fr]">
+        <aside
+            class="lg:w-[250px] max-lg:hidden lg:grid-col-span-1 pb-6 px-8 border-r-1 border-gray-300 flex flex-col gap-8 white ">
+            <div class="flex justify-between items-center pt-2">
+                <div class="brand flex px-2 items-center gap-3">
+                    <i class="text-3xl ri-stack-fill"></i>
+                    <div class="leading-none">
+                        <h2 class="sm:text-lg max-sm:text-base  maxinline font-bold">FinTrack Pro</h2>
+                        <div class="text-gray-500 text-xs">Enterprise Finance</div>
+                    </div>
                 </div>
+                <i class="asideClose lg:hidden border p-1 rounded-lg ri-close-large-line"></i>
             </div>
+
             <div class="h-full center flex flex-col justify-between">
-                <div class="text-lg">
+                <div class="asideBtn sm:text-lg flex flex-col justify-center">
                     <button
                         class="dashboardBtn bg-blue-100 text-blue-800 font-semibold mb-2 rounded-lg py-2 pl-3 pr-10 hover:bg-blue-100 hover:text-blue-700 focus:bg-blue-100">
                         <i class="ri-dashboard-line"></i><span class="ml-4">Dashboard</span>
@@ -120,100 +131,116 @@
                 </button>
             </div>
         </aside>
-        <main class="w-full h-full overflow-scroll">
-            <nav class="w-full border-b-1 border-gray-300 h-[60px] white flex justify-end items-center">
-                <div class="right flex items-center gap-6 pl-1 pr-8">
+        <main class="lg:w-[100%-250px] max-w-full overflow-x-hidden overflow-y-scroll h-full lg:grid-col-span-1">
+            <nav
+                class="lg:w-full top-0 border-b-1 border-gray-300 px-8 max-sm:px-4 h-[60px] white flex lg:justify-end max-lg:justify-between items-center">
+                <span class="lg:hidden flex lg items-center cursor-pointer gap-3">
+                    <div class="humburger active:scale-90 flex flex-col gap-1">
+                        <hr class="bg-gray-500 w-6 h-[4px] rounded-lg">
+                        <hr class="bg-gray-500 w-6 h-[4px] rounded-lg ">
+                        <hr class="bg-gray-500 w-6 h-[4px] rounded-lg ">
+                    </div>
+                    <h2 class="text-xl max-md:text-lg inline font-bold">FinTrack Pro</h2>
+                </span>
+                <div class="right flex items-center gap-6 max-sm:gap-2 pl-1">
                     <hr class="h-5 w-[1px] border-1 border-gray-300" />
                     <div class="userLogin font-medium">User login</div>
-                    <button class="logOut active:scale-95 gap-3 border-2 border-gray-100 px-2 py-1 rounded-xl">
+                    <button class="logOut active:scale-95 gap-3 text-sm border-2 border-gray-100 px-2 py-1 rounded-xl">
                         <i class="font-bold ri-logout-box-r-line"></i>
                         <span>Logout</span>
                     </button>
                 </div>
             </nav>
-            <section class="dashboard gap-y-5 gap-x-4 p-9 w-full center grid grid-cols-[1fr_25vw]">
-                <div class="heading bodyCol col-span-2 self-end">
+            <section
+                class="dashboard w-full gap-y-5 gap-x-4 p-9 max-sm:p-2 sm:grid sm:grid-cols-[1fr_20vw_1fr] max-sm:grid max-sm:grid-cols-[1fr] max-lg:place-items-center">
+                <div class="heading bodyCol sm:col-span-3 max-sm:col-span-1">
                     <h1 class="font-bold text-3xl">Financial Overview</h1>
                     <p class="text-gray-600">Real-time tracking application</p>
                 </div>
-                <div class="calTrans w-full col-span-2 flex gap-x-3">
-                    <div class="min-[830px]:w-[20vw] w-[112px] max-h-max white p-5 border rounded-lg">
+                <div
+                    class="calTrans lg:w-[67vw] max-lg:w-[80vw] sm:col-span-3 max-sm:col-span-1 md:grid md:grid-cols-[1fr_1fr_1fr_1fr] max-md:grid max-md:grid-cols-[1fr_1fr] gap-3 max-lg:justify-between max-md:place-items-center">
+                    <div class="max-md:w-[40vw] white p-5 border rounded-lg">
                         <div class="mb-2 active:scale-90 cursor-pointer w-11 py-2 text-center bg-blue-100 rounded-lg">
                             <i class="text-xl text-blue-800 ri-bank-fill"></i>
                         </div>
-                        <span class="text-base text-gray-500">Current Balance</span>
+                        <div class="max-sm:w-22 text-base text-gray-500">Current Balance</div>
                         <div class="currentBal text-3xl text-black-800 font-bold">₹0.00</div>
                     </div>
-                    <div class="min-[830px]:w-[20vw] w-[112px] max-h-max h-46 white p-5 border rounded-lg">
+                    <div class="max-md:w-[40vw] white p-5 border rounded-lg">
                         <div class="mb-2 active:scale-90 cursor-pointer w-11 py-2 text-center bg-green-100 rounded-lg">
                             <i class="text-xl text-green-800 ri-line-chart-fill"></i>
                         </div>
-                        <span class="text-base text-gray-500">Total Income</span>
+                        <div class="max-sm:w-22 text-base text-gray-500">Total Income</div>
                         <h2 class="totalInc text-3xl text-green-800 font-bold">₹0.00</h2>
                     </div>
-                    <div class="min-[830px]:w-[20vw] w-[112px] max-h-max h-46 white p-5 border rounded-lg">
+                    <div class="max-md:w-[40vw] white p-5 border rounded-lg">
                         <div class="mb-2 active:scale-90 cursor-pointer w-11 py-2 text-center bg-red-100 rounded-lg">
                             <i class="text-xl text-red-800 ri-line-chart-fill"></i>
                         </div>
-                        <span class="text-base text-gray-500">Total Expense</span>
+                        <div class="max-sm:w-22 text-base text-gray-500">Total Expense</div>
                         <h2 class="totalExp text-3xl text-red-800 font-bold">₹0.00</h2>
                     </div>
-                    <div class="min-[830px]:w-[20vw] w-[112px] max-h-max h-46 white p-5 border rounded-lg">
+                    <div class="max-md:w-[40vw] white p-5 border rounded-lg">
                         <div class="mb-2 active:scale-90 cursor-pointer w-11 py-2 text-center bg-blue-100 rounded-lg">
                             <i class="text-xl text-blue-800 bi bi-piggy-bank-fill"></i>
                         </div>
-                        <span class="text-base text-gray-500">Total Transactions</span>
+                        <div class="max-sm:w-22 text-base text-gray-500">Total Transactions</div>
                         <h2 class="totalTrans text-3xl text-black-800 font-bold">0</h2>
                     </div>
                 </div>
-                <div class="graph w-[789px] h-84 p-5 rounded-lg white border">
+                <div
+                    class="graph lg:w-[47vw] max-lg:w-[50vw] max-sm:w-[80vw] lg:mr-2 sm:col-span-2 max-sm:col-span-1 w-fit h-84 p-5 rounded-lg white border max-lg:justify-self-end max-sm:justify-self-center">
                     <h2 class="mb-2 text-2xl font-bold">Cash Flow Analysis</h2>
                     <canvas id="cashChart" class="canvas max-h-63 rounded bodyCol"></canvas>
                 </div>
-                <div class="dataReset max-w-[364px] min-w-[184px] p-5 h-48 white border rounded-lg flex flex-col gap-3">
+                <div
+                    class="dataReset lg:w-fit max-lg:w-[28vw] max-sm:w-[60vw] sm:col-span-1 max-sm:col-span-1 p-5 h-48 white border rounded-lg flex flex-col gap-3 max-lg:justify-self-start max-sm:justify-self-center">
                     <h2 class="text-2xl font-bold mb-2">Preferences</h2>
                     <div class="flex justify-between items-center">
-                        <span class="font-semibold">Dark Mode</span>
+                        <span class="mr-2 font-semibold">Dark Mode</span>
                         <span class="toggle w-12 h-6 px-1 bg-gray-300 rounded-4xl flex items-center cursor-pointer">
-                            <div
-                                class="circle w-5 h-5 bg-white rounded-3xl">
+                            <div class="circle w-5 h-5 bg-white rounded-3xl">
                             </div>
                         </span>
                     </div>
                     <hr class="border-1 border-gray-200" />
-                    <div class="resetBtn px-3 flex justify-center py-2 border-1 border-red-200 bg-red-50 text-red-800 rounded-lg cursor-pointer active:scale-90">
+                    <div
+                        class="resetBtn px-3 flex justify-center py-2 border-1 border-red-200 bg-red-50 text-red-800 rounded-lg cursor-pointer active:scale-90">
                         <i class="ri-delete-bin-2-fill"></i>
                         <span class="text-sm font-semibold">Reset All Data</span>
                     </div>
                 </div>
-                <div class="dataTrans w-[789px] min-h-42 p-6 white border rounded-lg flex flex-col gap-3">
+                <div
+                    class="dataTrans lg:w-[68vw] sm:w-[80vw] max-sm:w-[90vw] mb-10 sm:col-span-3 max-sm:col-span-1 w-fit min-h-42 max-sm:px-3 p-6 white border rounded-lg flex flex-col gap-3">
                     <h2 class="font-bold text-3xl">All Transactions</h2>
                     <div class="flex justify-between items-center">
                         <div
-                            class="search w-70 text-black rounded-lg cursor-pointer px-2 py-1 bg-gray-50 border-2 border-gray-100 flex gap-3 items-center">
-                            <i class="text-lg ri-search-line"></i>
-                            <input class="outline-none text-lg" type="text" placeholder="Search transactions..." required/>
+                            class="search text-black rounded-lg cursor-pointer px-2 py-1 bg-gray-50 border-2 border-gray-100 flex gap-3 items-center">
+                            <i class="ri-search-line"></i>
+                            <input class="max-sm:w-[27vw] outline-none" type="text" placeholder="Search transactions..."
+                                required />
                         </div>
 
-                        <select name="" id=""
-                            class="w-55 p-2 text-black bg-gray-50 cursor-pointer border-2 border-gray-200 rounded-lg flex justify-between">
-                            <option value="">All Types</option>
-                            <option value="">Income Only</option>
-                            <option value="">Expense Only</option>
+                        <select name="" id="filterTrans"
+                            class="max-sm:w-[27vw] px-2 py-1 text-black bg-gray-50 cursor-pointer border-2 border-gray-200 rounded-lg flex justify-between">
+                            <option value="all">All Types</option>
+                            <option value="income">Income Only</option>
+                            <option value="expense">Expense Only</option>
                         </select>
                     </div>
-                    <div class="transName grid grid-cols-[1fr_1fr_1fr_1fr_1fr] font-semibold text-base text-gray-500">
-                        <span>DATE</span>
-                        <span>DESCRIPTION</span>
-                        <span>CATEGORY</span>
-                        <span>AMOUNT</span>
-                        <span>ACTIONS</span>
+                    <div
+                        class="md:text-base max-md:text-sm max-sm:text-xs gap-x-2 transName grid grid-cols-[1fr_1fr_1fr_1fr_1fr] font-semibold text-gray-500">
+                        <div class="">DATE</div>
+                        <div class=" ">DESCRIPTION</div>
+                        <div class="">CATEGORY</div>
+                        <div class="">AMOUNT</div>
+                        <div class="">ACTIONS</div>
                     </div>
                     <hr class="border-1 border-gray-200" />
                     <div class="allTrans"></div>
                 </div>
             </section>
-            <section class="hidden setting p-8">
+            <section class="hidden setting p-8 lg:w-[100vw] max-lg:w-[90vw]">
                 <h2 class="font-bold text-3xl">Settings</h2>
                 <p class="mb-5 text-gray-500">Manage your account profile and app formatting.</p>
                 <form class="proDetails flex flex-col gap-3 max-w-[52vw] min-w-[316px] white border p-4 rounded-xl">
@@ -221,14 +248,16 @@
                     <div class="w-full flex justify-between gap-3">
                         <div class="w-1/2 flex flex-col">
                             <label for="name">Full Name</label>
-                            <input class="text-black outline-black rounded-lg border border-gray-200 px-2 py-1 bg-gray-100"
+                            <input
+                                class="text-black outline-black rounded-lg border border-gray-200 px-2 py-1 bg-gray-100"
                                 type="text" id="proName" placeholder="name" required>
                         </div>
                         <div class="w-1/2  flex flex-col">
                             <label for="currency">Primary Currency</label>
-                            <select class="text-black outline-black bg-gray-100 rounded-lg border border-gray-200 px-2 py-1"
+                            <select
+                                class="text-black outline-black bg-gray-100 rounded-lg border border-gray-200 px-2 py-1"
                                 name="" id="currency" value="">
-                                <option value="USED($)">USD($)</option>
+                                <option value="USD($)">USD($)</option>
                                 <option value="EUR(€)">EUR(€)</option>
                                 <option value="GBP(£)">GBP(£)</option>
                                 <option value="INR(₹)">INR(₹)</option>
@@ -236,7 +265,8 @@
                             </select>
                         </div>
                     </div>
-                    <button type="submit" class="w-35 cursor-pointer active:scale-90 rounded-lg px-2 py-1 bg-black text-white">Save
+                    <button type="submit"
+                        class="w-35 cursor-pointer active:scale-90 rounded-lg px-2 py-1 bg-black text-white">Save
                         Changes</button>
                 </form>
             </section>
@@ -251,26 +281,25 @@
                     <i class="close text-gray-500 text-lg font-black hover:text-black ri-close-fill"></i>
                 </div>
                 <label for="type" class="font-medium text-gray-600">Type</label>
-                <select name="" id="type"
-                    class="text-black outline-black px-2 py-1 rounded-sm bg-gray-100 border">
+                <select name="" id="type" class="text-black outline-black px-2 py-1 rounded-sm bg-gray-100 border">
                     <option value="expense">Expense</option>
                     <option value="income">Income</option>
                 </select>
                 <label for="des" class="font-medium text-gray-600">Description</label>
                 <input type="text" class="text-black outline-black px-2 py-1 rounded-sm bg-gray-100 border"
-                    placeholder="e.g. Amazon, Salary, Coffee" required/>
+                    placeholder="e.g. Amazon, Salary, Coffee" required />
 
                 <div class="flex justify-between">
                     <div class="flex flex-col">
                         <label for="amount" class="font-medium text-gray-600">Amount</label>
                         <input type="number"
                             class="text-black outline-black mr-2 max-sm:w-[25vw]  px-2 py-1 rounded-sm bg-gray-100 border"
-                            placeholder="amount" required/>
+                            placeholder="amount" required />
                     </div>
                     <div class="flex flex-col">
                         <label for="date" class="font-medium text-gray-600">Date</label>
                         <input type="date" id="currentDate"
-                            class="text-black outline-black  px-2 py-1 rounded-sm bg-gray-100 border" required/>
+                            class="text-black outline-black  px-2 py-1 rounded-sm bg-gray-100 border" required />
                     </div>
                 </div>
 
