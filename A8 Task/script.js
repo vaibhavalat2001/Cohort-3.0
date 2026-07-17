@@ -376,8 +376,6 @@ toggle.addEventListener("click", () => {
 function newTrans(fill = "all", search) {
   allTrans.innerHTML = "";
   let div = document.createElement("div");
-  console.log(search);
-  console.log(fill);
   transactions = transactionsData();
   userPro = userProfile();
 
