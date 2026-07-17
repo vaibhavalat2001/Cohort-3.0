@@ -6,6 +6,7 @@ const register = document.querySelector(".register");
 const regLink = document.querySelector(".regLink");
 const registerForm = document.querySelector(".registerForm");
 const closeReg = document.querySelector(".closeReg");
+const logo = document.querySelector(".logo");
 const mainPage = document.querySelector(".mainPage");
 const logOut = document.querySelector(".logOut");
 const userLogin = document.querySelector(".userLogin");
@@ -35,7 +36,18 @@ const humburger = document.querySelector(".humburger");
 const aside = document.querySelector("aside");
 const asideBtn = document.querySelector(".asideBtn");
 const asideClose = document.querySelector(".asideClose");
+const search = document.querySelector(".search");
 const filterTrans = document.querySelector("#filterTrans");
+
+// logo
+logo.addEventListener("click", () => {
+  dashboard.classList.remove("hidden");
+  dashboard.classList.add("sm:grid");
+  dashboard.classList.add("max-sm:grid");
+  dashboardBtn.classList.add("bg-blue-100", "text-blue-800", "font-semibold");
+  setting.classList.add("hidden");
+  settingBtn.classList.remove("bg-blue-100", "text-blue-800", "font-semibold");
+});
 
 // Register
 regLink.addEventListener("click", () => {
@@ -58,7 +70,7 @@ closeLog.addEventListener("click", () => {
 });
 
 userLogin.addEventListener("click", () => {
-  if (userPro.some((user) => user)) {
+  if (userPro && userPro.length > 0) {
   } else {
     login.classList.remove("hidden");
   }
@@ -67,17 +79,25 @@ userLogin.addEventListener("click", () => {
 logOut.addEventListener("click", () => {
   localStorage.removeItem("user");
   userLogin.textContent = "User login";
+  login.classList.remove("hidden");
+
+  // transactions = transactionsData();
+  calTrans();
+  newTrans();
+  renderChart();
   userProfile();
   proSetting();
 });
 
-let regUser = JSON.parse(localStorage.getItem("registeredUser")) || [];
-
-let userPro;
-function userProfile() {
-  userPro = JSON.parse(localStorage.getItem("user")) || [];
+function regUsers() {
+  return JSON.parse(localStorage.getItem("registeredUser")) || [];
 }
-userProfile();
+let regUser = regUsers();
+
+function userProfile() {
+  return JSON.parse(localStorage.getItem("user")) || [];
+}
+let userPro = userProfile();
 
 loginForm.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -99,11 +119,16 @@ loginForm.addEventListener("submit", (e) => {
       "user",
       JSON.stringify([loginName, currency.toString()]),
     );
+
+    transactions = transactionsData();
+    userPro = userProfile();
+    calTrans();
+    newTrans();
+    proSetting();
   } else {
     alert("Invalid user or password");
   }
 
-  proSetting();
   loginForm.reset();
 });
 
@@ -134,18 +159,18 @@ registerForm.addEventListener("submit", (e) => {
 let logged = () => {
   login.classList.add("hidden");
   mainPage.classList.remove("hidden");
-  if (userPro.some((user) => user)) {   
+  if (userPro && userPro.length > 0) {
     userLogin.textContent = userPro[0].split(" ")[0] || "User login";
-  };
-}
+  }
+};
 logged();
 
 // *** left side functionality:
 // dashboard & setting
 settingBtn.addEventListener("click", () => {
   dashboard.classList.add("hidden");
-  dashboard.classList.remove("sm:grid");
-  dashboard.classList.remove("max-sm:grid");
+  dashboard.classList.toggle("sm:grid");
+  dashboard.classList.toggle("max-sm:grid");
   dashboardBtn.classList.remove(
     "bg-blue-100",
     "text-blue-800",
@@ -158,9 +183,10 @@ settingBtn.addEventListener("click", () => {
 
 dashboardBtn.addEventListener("click", () => {
   dashboard.classList.remove("hidden");
-  dashboard.classList.add("sm:grid");
-  dashboardBtn.classList.add("bg-blue-100", "text-blue-800", "font-semibold");
+  dashboard.classList.toggle("sm:grid");
+  dashboard.classList.toggle("max-sm:grid");
   aside.classList.toggle("max-lg:hidden");
+  dashboardBtn.classList.add("bg-blue-100", "text-blue-800", "font-semibold");
   setting.classList.add("hidden");
   settingBtn.classList.remove("bg-blue-100", "text-blue-800", "font-semibold");
 });
@@ -168,6 +194,7 @@ dashboardBtn.addEventListener("click", () => {
 // Add new Transaction
 newTransBtn.addEventListener("click", () => {
   addTrans.classList.toggle("hidden");
+  aside.classList.add("max-lg:hidden");
   today();
 });
 
@@ -183,21 +210,23 @@ let today = () => {
 
 // Adding Transactions in the form
 
-let transactions;
-let transactionsData = () => {
-  transactions =
-    JSON.parse(localStorage.getItem(`transactions_${userPro[0]}`)) || [];
-};
-transactionsData();
+function transactionsData() {
+  return JSON.parse(localStorage.getItem(`transactions_${userPro[0]}`)) || [];
+}
+let transactions = transactionsData();
 
 let index = null;
 transForm.addEventListener("submit", (e) => {
   e.preventDefault();
-  let type = e.target[0].value;
-  let dec = e.target[1].value;
-  let amt = e.target[2].value;
-  let date = e.target[3].value;
-  let cat = e.target[4].value;
+  userPro = userProfile();
+  transactions = transactionsData();
+
+  const formData = new FormData(transForm);
+  let type = formData.get("type");
+  let dec = formData.get("dec");
+  let amt = formData.get("amt");
+  let date = formData.get("date");
+  let cat = formData.get("cat");
 
   if (index === null) {
     transactions.push({
@@ -222,6 +251,7 @@ transForm.addEventListener("submit", (e) => {
       `transactions_${userPro[0]}`,
       JSON.stringify(transactions),
     );
+
     calTrans();
     newTrans();
   } else {
@@ -229,39 +259,43 @@ transForm.addEventListener("submit", (e) => {
     login.classList.remove("hidden");
   }
 
-  aside.classList.toggle("max-lg:hidden");
+  // aside.classList.toggle("max-lg:hidden");
   transForm.reset();
   addTrans.classList.add("hidden");
 });
 
 let chart;
+
 // Calculation income and expenses
-let calTrans = () => {
+function calTrans() {
   let income = 0;
   let expenses = 0;
 
-  transactions.forEach((tran) => {
-    if (tran.type === "income") {
-      income += Number(tran.amt);
-    } else {
-      expenses += Number(tran.amt);
-    }
-  });
+  transactions = transactionsData();
+  userPro = userProfile();
+
+  if (transactions.some((trans) => trans)) {
+    transactions.forEach((tran) => {
+      if (tran.type === "income") {
+        income += Number(tran.amt);
+      } else {
+        expenses += Number(tran.amt);
+      }
+    });
+  }
 
   transData(income, expenses);
   renderChart(income, expenses);
-};
+}
 calTrans();
 
 // represent transition on UI
 function transData(inc = 0, exp = 0) {
+  transactions = transactionsData();
+  userPro = userProfile();
+
   let exists = transactions.some((data) => data);
-  if (exists) {
-    currentBal.textContent = `${userPro[1][4]}${inc - exp}`;
-    totalInc.textContent = `${userPro[1][4]}${inc}`;
-    totalExp.textContent = `${userPro[1][4]}${exp}`;
-    totalTrans.textContent = transactions.length;
-  } else if (userPro.some((user) => user)) {
+  if (exists && userPro.length > 0) {
     currentBal.textContent = `${userPro[1][4]}${inc - exp}`;
     totalInc.textContent = `${userPro[1][4]}${inc}`;
     totalExp.textContent = `${userPro[1][4]}${exp}`;
@@ -339,18 +373,24 @@ toggle.addEventListener("click", () => {
 });
 
 // All Transactions
-function newTrans(fill = "all") {
+function newTrans(fill = "all", search) {
   allTrans.innerHTML = "";
   let div = document.createElement("div");
+  console.log(search);
+  console.log(fill);
+  transactions = transactionsData();
+  userPro = userProfile();
 
   transactions.forEach((data, ind) => {
-    
-    if(fill === "income" && data.type !== "income") return;
-    if(fill === "expense" && data.type !== "expense") return;
+    if (fill === "income" && data.type !== "income") return;
+    if (fill === "expense" && data.type !== "expense") return;
+    if (search && !data.dec.includes(search.trim().toLowerCase())) return;
 
-    const sign = data.type === "income"? `+${userPro[1][4]}` : `-${userPro[1][4]}`
-    const signClass = data.type === "income"? "text-green-600" : "text-red-600";
-    
+    const sign =
+      data.type === "income" ? `+${userPro[1][4]}` : `-${userPro[1][4]}`;
+    const signClass =
+      data.type === "income" ? "text-green-600" : "text-red-600";
+
     div.innerHTML += `<div class="h-fit grid md:text-lg sm:text-base max-sm:text-sm my-4 gap-x-2 items-center grid-cols-[1fr_1fr_1fr_1fr_1fr]">
                         <span class="">${data.date}</span>
                         <span class="font-bold">${data.dec}</span>
@@ -363,19 +403,30 @@ function newTrans(fill = "all") {
                         </div>
                         <hr class="w-full border border-gray-300">`;
   });
-  allTrans.append(div);
+  if (localStorage.getItem("user")) {
+    allTrans.append(div);
+  }
 }
 newTrans();
 
+// Filter Transaction
 filterTrans.addEventListener("change", () => {
-  newTrans(filterTrans.value);
+  newTrans(filterTrans.value, search.value);
 });
+
+// Search Transaction
+search.addEventListener("input", () => {
+  newTrans(filterTrans.value, search.value);
+})
+
 
 // Edit Transaction
 function edit(ind) {
   index = ind;
   newTransBtn.click();
   let data = transactions[ind];
+
+  // const formData = new FormData(transForm);
 
   transForm[0].value = data.type;
   transForm[1].value = data.dec;
@@ -411,9 +462,10 @@ resetBtn.addEventListener("click", () => {
 });
 
 // Profile Setting
-let proSetting = () => {
-  userProfile();
+function proSetting() {
+  userPro = userProfile();
   let proData = userPro.some((data) => data);
+
   if (proData) {
     proName.value = userPro[0];
     currency.value = userPro[1];
@@ -421,24 +473,49 @@ let proSetting = () => {
     proName.value = "User login";
     currency.value = "INR(₹)";
   }
-};
+}
 proSetting();
 
 proDetails.addEventListener("submit", (e) => {
   e.preventDefault();
+  userPro = userProfile();
+  regUser = regUsers();
+
   let name = e.target[0].value.trim().toLowerCase();
   let currency = e.target[1].value;
   if (userPro.some((data) => data)) {
     regUser.map((user) => {
       if (user.name === userPro[0]) {
-        user.name = name;
-        user.currency = currency;
-        userLogin.innerHTML = name.split(" ")[0];
+        let change;
+        if (name !== userPro[0] && currency !== userPro[1]) {
+          change = confirm(
+            "Are you want to change your profile name and currency?",
+          );
+        } else if (name !== userPro[0]) {
+          change = confirm("Are you want to change your profile name?");
+        } else {
+          change = confirm("Are you want to change your the currency?");
+        }
+
+        if (change) {
+          user.name = name;
+          user.currency = currency;
+          userLogin.innerHTML = name.split(" ")[0];
+          localStorage.setItem("user", JSON.stringify([name, currency]));
+        }
       }
     });
-
     localStorage.setItem("registeredUser", JSON.stringify(regUser));
-    localStorage.setItem("user", JSON.stringify([name, currency]));
+
+    if (transactions.some((trans) => trans)) {
+      localStorage.removeItem(`transactions_${userPro[0]}`);
+      userPro = userProfile();
+      localStorage.setItem(
+        `transactions_${userPro[0]}`,
+        JSON.stringify(transactions),
+      );
+    }
+
     proSetting();
     newTrans();
     calTrans();
@@ -461,7 +538,7 @@ humburger.addEventListener("click", () => {
   aside.classList.add(
     "max-lg:w-[250px]",
     "max-sm:w-[180px]",
-    "max-md:text-x",
+    "max-md:text-xl",
     "max-lg:absolute",
     "max-lg:top-0",
     "max-lg:bottom-0",

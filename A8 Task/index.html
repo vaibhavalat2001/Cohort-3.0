@@ -107,7 +107,8 @@
                 <div class="brand flex px-2 items-center gap-3">
                     <i class="text-3xl ri-stack-fill"></i>
                     <div class="leading-none">
-                        <h2 class="sm:text-lg max-sm:text-base  maxinline font-bold">FinTrack Pro</h2>
+                        <h2 class="sm:text-lg max-sm:text-base cursor-pointer maxinline font-bold">FinTrack Pro
+                        </h2>
                         <div class="text-gray-500 text-xs">Enterprise Finance</div>
                     </div>
                 </div>
@@ -128,7 +129,7 @@
                 <div class="flex flex-col justify-between">
                     <button class="newTransBtn bg-black mb-2 text-white rounded-lg py-2 cursor-pointer active:scale-95">
                         <i class="ri-add-fill mr-1"></i>
-                        <span>Add Transaction</span>
+                        <span class="max-sm:text-base">Add Transaction</span>
                     </button>
                     <div class="text-center text-sm text-orange-800">By, Vaibhav Gajanan Alat</div>
                 </div>
@@ -143,7 +144,7 @@
                         <hr class="bg-gray-500 w-6 h-[4px] rounded-lg ">
                         <hr class="bg-gray-500 w-6 h-[4px] rounded-lg ">
                     </div>
-                    <h2 class="text-xl max-md:text-lg inline font-bold">FinTrack Pro</h2>
+                    <h2 class="logo text-xl max-md:text-lg inline font-bold cursor-pointer">FinTrack Pro</h2>
                 </span>
                 <div class="right flex items-center gap-6 max-sm:gap-2 pl-1">
                     <hr class="h-5 w-[1px] border-1 border-gray-300" />
@@ -154,8 +155,7 @@
                     </button>
                 </div>
             </nav>
-            <section
-                class="dashboard w-full gap-y-5 gap-x-4 p-9 max-sm:p-2 sm:grid sm:grid-cols-[1fr_20vw_1fr] max-sm:grid max-sm:grid-cols-[1fr] max-lg:place-items-center">
+            <section class="dashboard w-full gap-y-5 gap-x-4 p-9 max-sm:p-2 sm:grid sm:grid-cols-[1fr_20vw_1fr] max-sm:grid max-sm:grid-cols-[1fr] max-lg:place-items-center">
                 <div class="heading bodyCol sm:col-span-3 max-sm:col-span-1">
                     <h1 class="font-bold text-3xl">Financial Overview</h1>
                     <p class="text-gray-600">Real-time tracking application</p>
@@ -218,9 +218,9 @@
                     <h2 class="font-bold text-3xl">All Transactions</h2>
                     <div class="flex justify-between items-center">
                         <div
-                            class="search text-black rounded-lg cursor-pointer px-2 py-1 bg-gray-50 border-2 border-gray-100 flex gap-3 items-center">
+                            class="text-black rounded-lg cursor-pointer px-2 py-1 bg-gray-50 border-2 border-gray-100 flex gap-3 items-center">
                             <i class="ri-search-line"></i>
-                            <input class="max-sm:w-[27vw] outline-none" type="text" placeholder="Search transactions..."
+                            <input class="search max-sm:w-[27vw] outline-none" type="text" placeholder="Search transactions..."
                                 required />
                         </div>
 
@@ -284,30 +284,31 @@
                     <i class="close text-gray-500 text-lg font-black hover:text-black ri-close-fill"></i>
                 </div>
                 <label for="type" class="font-medium text-gray-600">Type</label>
-                <select name="" id="type" class="text-black outline-black px-2 py-1 rounded-sm bg-gray-100 border">
+                <select name="type" id="type" class="text-black outline-black px-2 py-1 rounded-sm bg-gray-100 border">
                     <option value="expense">Expense</option>
                     <option value="income">Income</option>
                 </select>
-                <label for="des" class="font-medium text-gray-600">Description</label>
-                <input type="text" class="text-black outline-black px-2 py-1 rounded-sm bg-gray-100 border"
+                <label for="dec" class="font-medium text-gray-600">Description</label>
+                <input type="text" id="dec" name="dec"
+                    class="text-black outline-black px-2 py-1 rounded-sm bg-gray-100 border"
                     placeholder="e.g. Amazon, Salary, Coffee" required />
 
                 <div class="flex justify-between">
                     <div class="flex flex-col">
                         <label for="amount" class="font-medium text-gray-600">Amount</label>
-                        <input type="number"
+                        <input type="number" name="amt" id="amount"
                             class="text-black outline-black mr-2 max-sm:w-[25vw]  px-2 py-1 rounded-sm bg-gray-100 border"
                             placeholder="amount" required />
                     </div>
                     <div class="flex flex-col">
-                        <label for="date" class="font-medium text-gray-600">Date</label>
-                        <input type="date" id="currentDate"
+                        <label for="currentDate" class="font-medium text-gray-600">Date</label>
+                        <input type="date" id="currentDate" name="date"
                             class="text-black outline-black  px-2 py-1 rounded-sm bg-gray-100 border" required />
                     </div>
                 </div>
 
                 <label for="category" class="font-medium text-gray-600">Category</label>
-                <select name="" id="category" required
+                <select name="cat" id="category" required
                     class="outline-black text-black px-2 py-1 rounded-sm bg-gray-100 border">
                     <option value="">Select a category</option>
                     <option value="food & dining">Food & Dining</option>
