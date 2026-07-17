@@ -223,7 +223,7 @@ transForm.addEventListener("submit", (e) => {
 
   const formData = new FormData(transForm);
   let type = formData.get("type");
-  let dec = formData.get("dec");
+  let dec = formData.get("dec").toLocaleLowerCase();
   let amt = formData.get("amt");
   let date = formData.get("date");
   let cat = formData.get("cat");
