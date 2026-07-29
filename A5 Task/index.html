@@ -1,51 +1,59 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en" class="w-full h-full box-border">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A5 Responsive Web</title>
-    <link rel="stylesheet" href="./style.css">
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.9.0/fonts/remixicon.css" rel="stylesheet" />
+    <title>Task Manager</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="./style.css">
 </head>
-
-<body>
-
-    <!-- https://ayush-ahirwar-12.github.io/Oliv-Responsive-Branding-Agency-Landing-Page/ -->
-
-
-    <main>
-        <section class="page1 ">
-            <nav class="flex justify-between bg-red-500 pt-10 pr-34 pb-6 pl-24">
-                <div class="left flex gap-4">
-                    <img src="https://cdn.prod.website-files.com/63c3f1995d4c3581bbc944b5/63c3fed42405e70f33df42ee_logo.svg" alt="brand">
-                    <span class="w-30 bg-[#edded5] rounded-4xl align-middle">We are hiring!</span>
+<body class=" w-full h-full box-border">
+    <main class="w-full h-full">
+        <!-- 1. Task Creation Module -->
+        <nav class="w-full flex justify-between items-center p-5 bg-[#ff4d6d]">
+            <h1 class="md:text-3xl text-xl font-bold">Task Manager</h1>
+            <div class="left flex gap-4 items-center">
+                <div class="theme text-2xl">
+                    <span class="day cursor-pointer hidden">🌞</span>
+                    <span class="night cursor-pointer">🌙</span>
                 </div>
-                <div class="right flex gap-12">
-                    <ul class="flex gap-8">
-                        <li><a href="">Work</a></li>
-                        <li><a href="">Services</a></li>
-                        <li><a href="">About</a></li>
-                        <li><a href="">Blog</a></li>
-                        <li><a href="">Pages</a></li>
-                        <li><a href="">Cart</a></li>
-                    </ul>
-                    <div class="login">Get in Touch</div>
-                </div>
-            </nav>
-            <hr>
+                <button id="newTask" class="bg-green-300 font-bold px-2 py-1 rounded-xl cursor-pointer active:scale-90">New Task</button>
+            </div>
+        </nav>
+
+        <section class="formSec w-full h-full bg-[rgba(44,41,41,0.6)] hidden absolute top-0 flex justify-center items-center">
+            <form id="form" class="rounded-lg flex flex-col w-1/2 h-1/4 justify-between items-center px-5 pb-5 bg-white text-black">
+                <div class="flex justify-end end w-full -mr-10"><h1 class="close font-bold text-lg border-2 border-gray-300 rounded-lg px-2">X</h1></div>
+                <input type="text" id="title" class="border w-full px-4 rounded-lg" placeholder="Task Title">
+                <select name="" id="drop-down">
+                    <option value="ongoing">OnGoing</option>
+                    <option value="pending">Pending</option>
+                    <option value="complete">Complete</option>
+                </select>
+                <button class="bg-yellow-300 rounded-xl w-24 font-bold py-1 px-2" type="submit">Add Task</button>
+            </form>
         </section>
-        <section class="page2"></section>
-        <section class="page3"></section>
-        <section class="page4"></section>
-        <section class="page5"></section>
-        <section class="page6"></section>
-        <section class="page7"></section>
-        <section class="page8"></section>
-        <section class="page9"></section>
-        <section class="page10"></section>
-    </main>
-</body>
 
+        <section class="tasks flex justify-center w-full h-fit p-10 gap-10 flex-wrap">
+            <!-- <div class="task bg-blue-900 w-[200px] h-[200px] rounded-lg px-4 pb-4">
+                <div class="status flex justify-end font-bold text-orange-300 -mr-2"><h2>ongoing</h2></div>
+                <h1 class="font-bold md:text-3xl h-3/4 text-xl text-white">hello</h1>
+                <div class="btn font-bold w-full flex justify-between">
+                    <button class="bg-yellow-300 rounded-lg px-1 cursor-pointer">Update</button>
+                    <button class="bg-red-700 rounded-lg px-1 cursor-pointer">Delete</button>
+                </div>
+            </div> -->
+        </section>
+    </main>
+
+<!-- Task 7: Event Propagation Demonstration. -->
+    <div class="grandparent">
+        <div class="parent">
+            <button class="child"></button>
+        </div>
+    </div>
+
+
+    <script src="./script.js"></script>
+</body>
 </html>
