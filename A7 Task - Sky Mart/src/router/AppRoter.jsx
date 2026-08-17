@@ -41,7 +41,7 @@ const AppRoter = () => {
           element: <MainLayout />,
           children: [
             {
-              index: true,
+              path: "",
               element: <HomePage />,
             },
             {

@@ -180,7 +180,7 @@ const RegisterPage = () => {
                   message: "Password not matching",
                 },
               })}
-              type="password"
+              type="text"
               placeholder="Confirm password"
               className="w-full h-[57px] rounded-[20px] bg-[#1d1d1d] border border-[#363636]
             pl-[50px] pr-5 text-white placeholder:text-[#666666]
