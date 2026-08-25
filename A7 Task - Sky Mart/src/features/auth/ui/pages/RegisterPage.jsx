@@ -1,6 +1,6 @@
 import React from "react";
 import { User, Mail, Lock, Eye, ArrowRight, Zap, EyeOff, LockKeyhole } from "lucide-react";
-import { useAuth } from "../hooks/AuthHook";
+import { useAuth } from "../../hooks/AuthHook"
 
 const RegisterPage = () => {
   const {
@@ -27,7 +27,7 @@ const RegisterPage = () => {
       </div>
 
       {/* Register Card */}
-      <div className="w-full max-w-[560px] bg-[#101010] border border-[#292929] rounded-[30px] px-10 py-11">
+      <div className="w-full max-w-140 bg-[#101010] border border-[#292929] rounded-[30px] px-10 py-11">
         {/* Heading */}
         <div className="mb-10">
           <h2 className="text-[32px] font-semibold tracking-tight">
@@ -63,8 +63,8 @@ const RegisterPage = () => {
               })}
               type="text"
               placeholder="Full name"
-              className="w-full h-[57px] rounded-[20px] bg-[#1d1d1d] border border-[#363636]
-            pl-[50px] pr-5 text-white placeholder:text-[#666666]
+              className="w-full h-14 rounded-[20px] bg-[#1d1d1d] border border-[#363636]
+            pl-12 pr-5 text-white placeholder:text-[#666666]
             outline-none focus:border-[#c6ff00]"
             />
           </div>
@@ -89,8 +89,8 @@ const RegisterPage = () => {
               })}
               type="email"
               placeholder="Email address"
-              className="w-full h-[57px] rounded-[20px] bg-[#1d1d1d] border border-[#363636]
-            pl-[50px] pr-5 text-white placeholder:text-[#666666]
+              className="w-full h-14 rounded-[20px] bg-[#1d1d1d] border border-[#363636]
+            pl-12 pr-5 text-white placeholder:text-[#666666]
             outline-none focus:border-[#c6ff00]"
             />
           </div>
@@ -123,7 +123,7 @@ const RegisterPage = () => {
                 placeholder="Password"
                 className="
                   w-full
-                  h-[56px]
+                  h-14
                   pl-14
                   pr-14
                   rounded-2xl
@@ -133,7 +133,7 @@ const RegisterPage = () => {
                   text-white
                   placeholder:text-[#666666]
                   outline-none
-                  focus:border-[var(--c1)]
+                  focus:border-(--c1)
                   transition
                 "
               />
@@ -182,8 +182,8 @@ const RegisterPage = () => {
               })}
               type="text"
               placeholder="Confirm password"
-              className="w-full h-[57px] rounded-[20px] bg-[#1d1d1d] border border-[#363636]
-            pl-[50px] pr-5 text-white placeholder:text-[#666666]
+              className="w-full h-14 rounded-[20px] bg-[#1d1d1d] border border-[#363636]
+            pl-12 pr-5 text-white placeholder:text-[#666666]
             outline-none focus:border-[#c6ff00]"
             />
             
@@ -197,7 +197,7 @@ const RegisterPage = () => {
           {/* Create Account */}
           <button
             type="submit"
-            className="w-full h-[65px] mt-0 rounded-[20px] bg-[#c6ff00]
+            className="w-full h-16 mt-0 rounded-[20px] bg-[#c6ff00]
           text-black text-[19px] font-semibold
           flex items-center justify-center gap-3
           hover:bg-[#b9f000] transition"

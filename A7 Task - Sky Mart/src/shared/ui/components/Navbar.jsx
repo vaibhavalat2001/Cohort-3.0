@@ -21,7 +21,7 @@ const Navbar = () => {
   return (
     <nav className="w-full bg-[#0b0b0b] border-b border-[#242424] text-white">
       <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10">
-        <div className="h-[76px] flex items-center justify-between">
+        <div className="h-19 flex items-center justify-between">
 
           {/* Logo */}
           <NavLink
@@ -33,7 +33,7 @@ const Navbar = () => {
                 w-10
                 h-10
                 rounded-xl
-                bg-[var(--c1)]
+                bg-(--c1)
                 flex
                 items-center
                 justify-center
@@ -48,7 +48,7 @@ const Navbar = () => {
             </div>
 
             <span className="text-2xl font-bold tracking-tight">
-              Sky<span className="text-[var(--c1)]">Mart</span>
+              Sky<span className="text-(--c1)">Mart</span>
             </span>
           </NavLink>
 
@@ -61,14 +61,14 @@ const Navbar = () => {
                 className={({ isActive }) =>
                   `text-[15px] font-medium transition ${
                     isActive
-                      ? "text-[var(--c1)]"
+                      ? "text-(--c1)"
                       : "text-[#888888] hover:text-white"
                   }`
                 }
               >
                 {link.name}
               </NavLink>
-            )}
+            ))}
           </div>
 
           {/* Right Section */}
@@ -102,7 +102,7 @@ const Navbar = () => {
                   h-4
                   px-1
                   rounded-full
-                  bg-[var(--c1)]
+                  bg-(--c1)
                   text-black
                   text-[10px]
                   font-bold
@@ -129,7 +129,7 @@ const Navbar = () => {
                 border-[#303030]
                 bg-[#151515]
                 text-[#dddddd]
-                hover:border-[var(--c1)]
+                hover:border-(--c1)
                 transition
               "
             >
@@ -179,7 +179,7 @@ const Navbar = () => {
                   className={({ isActive }) =>
                     `px-4 py-3 rounded-xl text-sm font-medium transition ${
                       isActive
-                        ? "bg-[#1a1a1a] text-[var(--c1)]"
+                        ? "bg-[#1a1a1a] text-(--c1)"
                         : "text-[#888888] hover:bg-[#151515] hover:text-white"
                     }`
                   }
@@ -218,7 +218,7 @@ const Navbar = () => {
                   flex-1
                   h-11
                   rounded-xl
-                  bg-[var(--c1)]
+                  bg-(--c1)
                   text-black
                   font-semibold
                   flex
