@@ -1,13 +1,8 @@
 import React from "react";
 import { NavLink } from "react-router";
-import {
-  Zap,
-  ShoppingCart,
-  User,
-  Menu,
-  X,
-} from "lucide-react";
+import { Zap, ShoppingCart, User, Menu, X, LogOut } from "lucide-react";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -18,16 +13,14 @@ const Navbar = () => {
     { name: "About", path: "/main/about" },
   ];
 
+  const { user } = useSelector((store) => store.auth);
+
   return (
     <nav className="w-full bg-[#0b0b0b] border-b border-[#242424] text-white">
       <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10">
         <div className="h-19 flex items-center justify-between">
-
           {/* Logo */}
-          <NavLink
-            to="/"
-            className="flex items-center gap-3 shrink-0"
-          >
+          <NavLink to="/" className="flex items-center gap-3 shrink-0">
             <div
               className="
                 w-10
@@ -53,18 +46,17 @@ const Navbar = () => {
           </NavLink>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="max-md:hidden flex gap-8">
             {navLinks.map((link) => (
               <NavLink
                 key={link.path}
                 to={link.path}
                 className={({ isActive }) =>
                   `text-[15px] font-medium transition ${
-                    isActive
-                      ? "text-(--c1)"
-                      : "text-[#888888] hover:text-white"
+                    isActive ? "text-(--c1)" : "text-[#888888] hover:text-white"
                   }`
                 }
+                end
               >
                 {link.name}
               </NavLink>
@@ -72,7 +64,33 @@ const Navbar = () => {
           </div>
 
           {/* Right Section */}
-          <div className="hidden md:flex items-center gap-3">
+          <div className="flex items-center gap-3">
+            {/* Profile */}
+            <button
+              type="button"
+              className="
+                flex
+                items-center
+                gap-2
+                px-4
+                py-2
+                rounded-xl
+                border
+                border-[#303030]
+                bg-[#151515]
+                text-[#dddddd]
+                hover:border-(--c1)
+                transition
+              "
+            >
+              <span className="bg-(--c1) text-black rounded-lg w-7 font-bold">
+                {user.name.slice(0, 1).toUpperCase()}
+              </span>
+              <span className="text-sm font-medium">
+                {user.name.split(" ")[0].charAt(0).toUpperCase() +
+                  user.name.split(" ")[0].slice(1).toLowerCase()}
+              </span>
+            </button>
 
             {/* Cart */}
             <button
@@ -89,6 +107,7 @@ const Navbar = () => {
                 hover:text-white
                 hover:bg-[#1a1a1a]
                 transition
+                border border-zinc-700
               "
             >
               <ShoppingCart size={21} />
@@ -115,36 +134,20 @@ const Navbar = () => {
               </span>
             </button>
 
-            {/* Profile */}
+            <button
+              className="border  text-[#888888]
+                hover:text-white
+                hover:bg-[#1a1a1a]
+                transition border-zinc-700 rounded-lg p-2 "
+            >
+              <LogOut size={21} />
+            </button>
+
+            {/* Mobile Menu Button */}
             <button
               type="button"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="
-                flex
-                items-center
-                gap-2
-                px-4
-                py-2
-                rounded-xl
-                border
-                border-[#303030]
-                bg-[#151515]
-                text-[#dddddd]
-                hover:border-(--c1)
-                transition
-              "
-            >
-              <User size={18} />
-              <span className="text-sm font-medium">
-                Account
-              </span>
-            </button>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            type="button"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="
               md:hidden
               w-10
               h-10
@@ -157,19 +160,15 @@ const Navbar = () => {
               hover:bg-[#1a1a1a]
               transition
             "
-          >
-            {isMenuOpen ? (
-              <X size={24} />
-            ) : (
-              <Menu size={24} />
-            )}
-          </button>
+            >
+              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Menu */}
         {isMenuOpen && (
           <div className="md:hidden border-t border-[#242424] py-5">
-
             <div className="flex flex-col gap-2">
               {navLinks.map((link) => (
                 <NavLink
@@ -183,6 +182,7 @@ const Navbar = () => {
                         : "text-[#888888] hover:bg-[#151515] hover:text-white"
                     }`
                   }
+                  end
                 >
                   {link.name}
                 </NavLink>
@@ -191,7 +191,6 @@ const Navbar = () => {
 
             {/* Mobile Actions */}
             <div className="flex gap-3 mt-4 pt-4 border-t border-[#242424]">
-
               <button
                 type="button"
                 className="
@@ -230,7 +229,6 @@ const Navbar = () => {
                 <User size={18} />
                 Account
               </button>
-
             </div>
           </div>
         )}

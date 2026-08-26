@@ -6,8 +6,11 @@ import LoginPage from "../../features/auth/ui/pages/LoginPage";
 import RegisterPage from "../../features/auth/ui/pages/RegisterPage";
 import MainLayout from "../layout/MainLayout";
 import AboutPage from "../../shared/ui/pages/AboutPage";
+import MainProtected from "./protected/MainProtected";
+import HomePage from "../../shared/ui/pages/HomePage";
+import ShopPage from "../../shared/ui/pages/ShopPage";
 
-const AppRoter = () => {
+const AppRouter = () => {
   const router = createBrowserRouter([
     {
       path: "/",
@@ -39,11 +42,11 @@ const AppRoter = () => {
           children: [
             {
               path: "",
-              element: <HomePage />,
+              element: <HomePage/>,
             },
             {
               path: "shop",
-              element: <ShopPage />,
+              element: <ShopPage/>,
             },
             {
               path: "about",
@@ -57,4 +60,4 @@ const AppRoter = () => {
   return <RouterProvider router={router} />;
 };
 
-export default AppRoter;
+export default AppRouter;

@@ -10,9 +10,6 @@ export const useAuth = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   
-  const [loggedUser, setLoggedUser] = useState(
-    JSON.parse(localStorage.getItem("loggedUser")) || [],
-  );
   const [registeredUser, setRegisteredUser] = useState(
     JSON.parse(localStorage.getItem("registeredUsers")) || [],
   );
@@ -43,8 +40,7 @@ export const useAuth = () => {
       return;
     }
 
-    setLoggedUser(user);
-    localStorage.setItem("loggedUser", JSON.stringify(user));
+    dispatch(addUser(user))
     toast.success(`${user.name.split(" ")[0]} logged successfully`);
     navigate("/main");
   };

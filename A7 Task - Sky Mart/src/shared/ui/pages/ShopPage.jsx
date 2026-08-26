@@ -6,6 +6,6 @@ const ShopPage = () => {
       shop page
     </div>
   );
-}
+}   
 
 export default ShopPage;
