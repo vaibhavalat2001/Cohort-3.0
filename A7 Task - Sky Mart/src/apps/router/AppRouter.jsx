@@ -8,7 +8,7 @@ import MainLayout from "../layout/MainLayout";
 import AboutPage from "../../shared/ui/pages/AboutPage";
 import MainProtected from "./protected/MainProtected";
 import HomePage from "../../shared/ui/pages/HomePage";
-import ShopPage from "../../shared/ui/pages/ShopPage";
+import ShopPage from "../../features/products/ui/pages/ShopPage";
 
 const AppRouter = () => {
   const router = createBrowserRouter([

@@ -2,11 +2,12 @@ import React from "react";
 import { NavLink } from "react-router";
 import { Zap, ShoppingCart, User, Menu, X, LogOut } from "lucide-react";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { removeUser } from "../../../features/auth/state/AuthSlice";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+  const dispatch = useDispatch();
   const navLinks = [
     { name: "Home", path: "/main" },
     { name: "Shop", path: "/main/shop" },
@@ -16,7 +17,7 @@ const Navbar = () => {
   const { user } = useSelector((store) => store.auth);
 
   return (
-    <nav className="w-full bg-[#0b0b0b] border-b border-[#242424] text-white">
+    <nav className="w-full fixed z-50 bg-[#0b0b0b] border-b border-[#242424] text-white">
       <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10">
         <div className="h-19 flex items-center justify-between">
           {/* Logo */}
@@ -69,6 +70,7 @@ const Navbar = () => {
             <button
               type="button"
               className="
+                max-sm:hidden
                 flex
                 items-center
                 gap-2
@@ -135,9 +137,11 @@ const Navbar = () => {
             </button>
 
             <button
+             onClick={() => dispatch(removeUser())}
               className="border  text-[#888888]
                 hover:text-white
-                hover:bg-[#1a1a1a]
+                hover:bg-red-900
+                hover:border-red-700
                 transition border-zinc-700 rounded-lg p-2 "
             >
               <LogOut size={21} />
@@ -191,29 +195,11 @@ const Navbar = () => {
 
             {/* Mobile Actions */}
             <div className="flex gap-3 mt-4 pt-4 border-t border-[#242424]">
+              {/* Profile */}
               <button
                 type="button"
                 className="
-                  flex-1
-                  h-11
-                  rounded-xl
-                  bg-[#151515]
-                  border
-                  border-[#303030]
-                  text-[#dddddd]
-                  flex
-                  items-center
-                  justify-center
-                  gap-2
-                "
-              >
-                <ShoppingCart size={18} />
-                Cart
-              </button>
-
-              <button
-                type="button"
-                className="
+                  sm:hidden
                   flex-1
                   h-11
                   rounded-xl
@@ -226,8 +212,13 @@ const Navbar = () => {
                   gap-2
                 "
               >
-                <User size={18} />
-                Account
+                <span className="bg-(--c1) text-black rounded-lg w-7 font-bold">
+                  {user.name.slice(0, 1).toUpperCase()}
+                </span>
+                <span className="text-sm font-medium">
+                  {user.name.split(" ")[0].charAt(0).toUpperCase() +
+                    user.name.split(" ")[0].slice(1).toLowerCase()}
+                </span>
               </button>
             </div>
           </div>

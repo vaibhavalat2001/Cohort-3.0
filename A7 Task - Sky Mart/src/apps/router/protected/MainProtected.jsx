@@ -10,7 +10,7 @@ const MainProtected = () => {
   }
 
   return (
-    <div className="bg-black h-screen text-white">
+    <div className="bg-[#0b0b0b] h-screen text-white">
       <Outlet /> 
     </div>
   );
