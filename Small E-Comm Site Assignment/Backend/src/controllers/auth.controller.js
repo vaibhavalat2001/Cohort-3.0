@@ -1,6 +1,6 @@
 import userModel from "../models/user.model.js";
 import bcrypt from "bcryptjs";
-import { generateTokens } from "../utils/generateTokens.js";
+import { generateTokens, verifyRefreshToken } from "../utils/generateTokens.js";
 
 //  ### @post   /api/auth/register
 export const register = async (req, res) => {
@@ -70,7 +70,7 @@ export const login = async (req, res) => {
       });
     }
 
-    const { accessToken, refreshToken } = generateTokens(user._id);
+    const { accessToken, refreshToken } = generateTokens(user._id, user.role);
 
     await userModel.findByIdAndUpdate(user._id, { refreshToken });
 
@@ -120,5 +120,71 @@ export const me = async (req, res) => {
   }
 };
 
-
 //  ### @post   /api/auth/refresh-token
+export const refresh = async (req, res) => {
+  const refreshToken = req.cookies.refreshToken;
+
+  if (!refreshToken) {
+    return res.status(404).json({
+      message: "required refresh token",
+    });
+  }
+
+  try {
+    const { id } = verifyRefreshToken(refreshToken);
+
+    const user = await userModel.findById(id);
+
+    if (refreshToken != user.refreshToken) {
+      await userModel.findByIdAndUpdate(user._id, { refreshToken: null });
+      return res.status(403).json({
+        message: "invalid or expired refresh token",
+      });
+    }
+
+    const { accessToken, refreshToken: newRefreshToken } = generateTokens(
+      user._id, user.role
+    );
+
+    await userModel.findByIdAndUpdate(id, { refreshToken: newRefreshToken });
+
+    res.cookie("refreshToken", newRefreshToken, { httpOnly: true });
+
+    return res.status(200).json({
+      message: "generated new tokens",
+      accessToken,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      message: "something went wrong on refresh token api",
+    });
+  }
+};
+
+//  ### @post /api/auth/logout
+export const logout = async (req, res) => {
+  const { id } = req.user;
+  try {
+    const user = await userModel.findById(id);
+
+    if (!user) {
+      return res.status(404).json({
+        message: "user not found",
+      });
+    }
+
+    await userModel.findByIdAndUpdate(user._id, { refreshToken: null });
+
+    res.clearCookie("refreshToken", {
+      httpOnly: true,
+    });
+
+    return res.status(200).json({
+      message: "user logout successfully",
+    });
+  } catch (error) {
+    return res.status(400).json({
+      message: "something went wrong in logout api",
+    });
+  }
+};
