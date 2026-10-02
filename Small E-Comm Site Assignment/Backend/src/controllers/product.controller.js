@@ -1,4 +1,5 @@
 import productModel from "../models/product.model.js";
+import userModel from "../models/user.model.js";
 import uploadFiles from "../services/storage.service.js";
 
 // create product controller
@@ -8,11 +9,13 @@ export const createProduct = async (req, res) => {
   try {
     const images = req.files;
 
-    const urls = [];
-    for (let img of images) {
-      const url = await uploadFiles(img.buffer, img.originalname);
-      urls.push(url.url);
-    }
+    const uploadResults = await Promise.all(
+      images.map((img) => uploadFiles(img.buffer, img.originalname)),
+    );
+
+    const urls = uploadResults.map((url) => url.url);
+
+    const userDetails = await userModel.findById(req.user.id);
 
     const product = await productModel.create({
       images: urls,
@@ -21,6 +24,7 @@ export const createProduct = async (req, res) => {
       price,
       sizes,
       user: req.user.id,
+      userName: userDetails.name,
     });
 
     return res.status(200).json({

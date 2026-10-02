@@ -136,7 +136,7 @@ export const refresh = async (req, res) => {
     const user = await userModel.findById(id);
 
     if (refreshToken != user.refreshToken) {
-      await userModel.findByIdAndUpdate(user._id, { refreshToken: null });
+      // await userModel.findByIdAndUpdate(user._id, { refreshToken: null });
       return res.status(403).json({
         message: "invalid or expired refresh token",
       });
