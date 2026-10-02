@@ -2,7 +2,7 @@ import axios from "axios";
 import { store } from "../app/store";
 
 const api = axios.create({
-  baseURL: "http://localhost:3000/api",
+  baseURL: "https://small-e-comm-backend.vercel.app/api",
   withCredentials: true,
 });
 
