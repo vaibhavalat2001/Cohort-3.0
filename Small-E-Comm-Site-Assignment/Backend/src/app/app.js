@@ -9,12 +9,16 @@ const app = express();
 app.use(
   cors({
     origin: "https://small-e-comm-frontend.vercel.app",
-    credentials: true
+    credentials: true,
   }),
 );
 
 app.use(express.json());
 app.use(cookieParser());
+
+app.get("/api", (req, res) => {
+  res.send("Server Connected");
+});
 
 app.use("/api/auth", authRouter);
 app.use("/api/products", productsRouter);
