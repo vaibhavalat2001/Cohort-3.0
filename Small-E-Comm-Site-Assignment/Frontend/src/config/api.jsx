@@ -12,9 +12,9 @@ api.interceptors.response.use(
   },
   async (error) => {
     if (error.response.status === 404) {
-      await api.post("auth/refresh-token");
+      await api.post("/auth/refresh-token");
+      console.log("error in response", error);
     }
-    return Promise.reject(error);
   },
 );
 
@@ -28,7 +28,7 @@ api.interceptors.request.use(
     return config;
   },
   (error) => {
-    console.log("me", error);
+    console.log("error in request", error);
   },
 );
 
