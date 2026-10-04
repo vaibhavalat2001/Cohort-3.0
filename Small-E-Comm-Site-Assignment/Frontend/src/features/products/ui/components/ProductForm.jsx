@@ -5,6 +5,7 @@ import api from "../../../../config/api";
 import { toast } from "react-toastify";
 
 const ProductForm = ({ setShowProductForm }) => {
+  const [loading, setLoading] = useState(false);
   const [imagePreviews, setImagePreviews] = useState([]);
 
   const {
