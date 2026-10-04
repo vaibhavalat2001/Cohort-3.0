@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Plus, Trash2, Upload, X } from "lucide-react";
+import { Loader2, Plus, Trash2, Upload, X } from "lucide-react";
 import { useForm, useFieldArray } from "react-hook-form";
 import api from "../../../../config/api";
 import { toast } from "react-toastify";
@@ -156,13 +156,15 @@ const ProductForm = ({ setShowProductForm }) => {
 
   const onSubmit = async (data) => {
     try {
-      
       if (data.images.length < 2) {
-
-        return toast.error("at least 2 images required");
+        return toast.error("At least 2 images required");
       }
 
+      // Start loading before API request
+      setLoading(true);
+
       const formData = new FormData();
+
       formData.append("title", data.title);
       formData.append("description", data.description);
       formData.append("price", JSON.stringify(data.price));
@@ -172,15 +174,23 @@ const ProductForm = ({ setShowProductForm }) => {
         formData.append("images", img);
       }
 
+      // API request
       const res = await api.post("/products", formData);
+
       if (res) {
         setShowProductForm((pre) => !pre);
+
         toast.success("Product Created", {
           closeOnClick: true,
         });
       }
     } catch (error) {
       console.log("error while creating product", error);
+
+      toast.error(error?.response?.data?.message || "Failed to create product");
+    } finally {
+      // Hide loading whether request succeeds or fails
+      setLoading(false);
     }
   };
 
@@ -597,15 +607,28 @@ const ProductForm = ({ setShowProductForm }) => {
       <div className="flex justify-end">
         <button
           type="submit"
+          disabled={loading}
           className="
-            flex h-10 items-center justify-center
-            rounded-lg bg-violet-600
-            px-6 text-sm font-semibold
-            text-white transition
-            hover:bg-violet-700
-          "
+    active:scale-90
+
+    flex h-10 items-center justify-center
+    rounded-lg bg-violet-600
+    px-6 text-sm font-semibold
+    text-white transition
+    hover:bg-violet-700
+
+    disabled:cursor-not-allowed
+    disabled:opacity-60
+  "
         >
-          Create Product
+          {loading ? (
+            <>
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              Creating...
+            </>
+          ) : (
+            "Create Product"
+          )}
         </button>
       </div>
     </form>
