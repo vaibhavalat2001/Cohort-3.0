@@ -13,7 +13,6 @@ api.interceptors.response.use(
   async (error) => {
     if (error.response.status === 404) {
       await api.post("auth/refresh-token");
-      return axios(error.config);
     }
     return Promise.reject(error);
   },
