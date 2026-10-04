@@ -11,10 +11,7 @@ api.interceptors.response.use(
     return response;
   },
   async (error) => {
-    if (error.response.status === 404) {
-      await api.post("/auth/refresh-token");
-      console.log("error in response", error);
-    }
+    console.log("error in response", error);
   },
 );
 
