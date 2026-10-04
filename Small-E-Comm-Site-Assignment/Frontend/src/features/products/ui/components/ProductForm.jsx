@@ -80,12 +80,12 @@ const ProductForm = ({ setShowProductForm }) => {
     }
 
     // Maximum 1 MB per image
-    const invalidFile = files.find((file) => file.size > 1024 * 1024);
+    const invalidFile = files.find((file) => file.size >= 3 * 1024 * 1024);
 
     if (invalidFile) {
       setError("images", {
         type: "manual",
-        message: `"${invalidFile.name}" must be 1 MB or less`,
+        message: `"${invalidFile.name}" must be 3 MB or less`,
       });
 
       setImagePreviews([]);
@@ -528,7 +528,7 @@ const ProductForm = ({ setShowProductForm }) => {
           </p>
 
           <p className="mt-1 text-[10px] text-gray-400">
-            PNG, JPG or WEBP • Maximum 5 images • 1 MB or less each
+            PNG, JPG or WEBP • Maximum 5 images • 3 MB or less each
           </p>
         </label>
 
