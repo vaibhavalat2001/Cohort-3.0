@@ -74,8 +74,12 @@ export const login = async (req, res) => {
 
     await userModel.findByIdAndUpdate(user._id, { refreshToken });
 
-    res.cookie("refreshToken", refreshToken, { httpOnly: true });
-
+    res.cookie("refreshToken", refreshToken, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+      path: "/",
+    });
     return res.status(200).json({
       message: "user logging successfully",
       data: {
@@ -135,21 +139,31 @@ export const refresh = async (req, res) => {
 
     const user = await userModel.findById(id);
 
-    if (refreshToken != user.refreshToken) {
-      // await userModel.findByIdAndUpdate(user._id, { refreshToken: null });
+    if (!user) {
+      return res.status(404).json({
+        message: "user not found",
+      });
+    }
+
+    if (refreshToken !== user.refreshToken) {
       return res.status(403).json({
         message: "invalid or expired refresh token",
       });
     }
 
     const { accessToken, refreshToken: newRefreshToken } = generateTokens(
-      user._id, user.role
+      user._id,
+      user.role,
     );
 
     await userModel.findByIdAndUpdate(id, { refreshToken: newRefreshToken });
 
-    res.cookie("refreshToken", newRefreshToken, { httpOnly: true });
-
+    res.cookie("refreshToken", newRefreshToken, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+      path: "/",
+    });
     return res.status(200).json({
       message: "generated new tokens",
       accessToken,
@@ -177,6 +191,9 @@ export const logout = async (req, res) => {
 
     res.clearCookie("refreshToken", {
       httpOnly: true,
+      secure: true,
+      sameSite: "none",
+      path: "/",
     });
 
     return res.status(200).json({
