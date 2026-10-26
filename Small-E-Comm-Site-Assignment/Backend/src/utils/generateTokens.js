@@ -4,7 +4,7 @@ import config from "../config/config.js";
 // generate access and refresh token
 export const generateTokens = (id) => {
   const accessToken = jwt.sign({ id }, config.ACCESS_TOKEN_SECRET, {
-    expiresIn: "1day",
+    expiresIn: "15m",
   });
 
   const refreshToken = jwt.sign({ id }, config.REFRESH_TOKEN_SECRET, {
